@@ -25,9 +25,12 @@ annotation <-
          )
 
 t_data %>% 
-  ggplot(aes(x = year, y = t_diff, fill = t_diff))+ # Provide x and y parameter
+  ggplot(aes(x = year, y = t_diff, fill = t_diff))+ # Provide x and y parameter, fill bars color
   geom_col() + #geom_bar generates a bar plot with summary build-in function, we dont need!!
   geom_text(data = annotation, aes(x = x, label = year), color = "white")+ #Add annotation, white font color
+  scale_fill_gradient2(low = "darkblue", mid = "white", high = "darkred", #Fill gradient color by specify the color
+                      midpoint = 0 # Specify the midpoint to be at zero
+                      )+
   theme_void() +
   theme(
     plot.background = element_rect(fill = "black")
