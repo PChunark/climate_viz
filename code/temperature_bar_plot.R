@@ -33,7 +33,8 @@ t_data %>%
                       )+
   theme_void() +
   theme(
-    plot.background = element_rect(fill = "black")
+    plot.background = element_rect(fill = "black"),
+    legend.text = element_text(color = "white")
   )
 
 
