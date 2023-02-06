@@ -26,12 +26,15 @@ annotation <-
          x = year + c(-5,5) #Add year coloumn a vector
          )
 
+#Add max t diff for template literal
+max_t_diff <- format(round(max(t_data$t_diff), 1), nsmall = 1)
+
 t_data %>% 
   ggplot(aes(x = year, y = t_diff, fill = t_diff))+ # Provide x and y parameter, fill bars color
   geom_col() + #geom_bar generates a bar plot with summary build-in function, we dont need!!
   geom_text(data = annotation, aes(x = x, label = year), color = "white")+ #Add annotation, white font color
   geom_text(x = 1880, y = 1, hjust = 0, #Justify the axis
-            label = glue("Global temperatures have increased by over {max(t_data$t_diff)}\u00B0C since {min(t_data$year)}"), #Add title texts, Add template literal by glue function
+            label = glue("Global temperatures have increased by over {max_t_diff}\u00B0C since {min(t_data$year)}"), #Add title texts, Add template literal by glue function
             color = "white") + #Fill white text color
   # scale_fill_gradient2(low = "darkblue", mid = "white", high = "darkred", #Fill gradient color by specify the color
  #                     midpoint = 0, # Specify the midpoint to be at zero
