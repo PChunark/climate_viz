@@ -29,11 +29,17 @@ t_diff <-
 
 # Create 3 Separated dataframe
 # Create dataframe for preceding December
-
 t_diff %>%
   filter(month == "Dec") %>% #Filter December
   mutate(year = year - 1,   #Calculate preceding year by using the original data
          month = "last_Dec") #Rename Dec to last_Dec
+
+#Create dataframe for next Jan
+t_diff %>%
+  filter(month == "Jan") %>% #Filter January
+  mutate(year = year + 1,    # Add extra year
+         month = "next_Jan") # Rename it
+
 
 t_diff %>%
   ggplot(aes(x = month, y = t_diff, group = year, color = year)) +
