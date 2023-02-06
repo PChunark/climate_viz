@@ -31,7 +31,7 @@ max_t_diff <- format(round(max(t_data$t_diff), 1), nsmall = 1)
 
 t_data %>% 
   ggplot(aes(x = year, y = t_diff, fill = t_diff))+ # Provide x and y parameter, fill bars color
-  geom_col() + #geom_bar generates a bar plot with summary build-in function, we dont need!!
+  geom_col(show.legend = FALSE) + #geom_bar generates a bar plot with summary build-in function, we dont need!!, remove legend from the plot
   geom_text(data = annotation, aes(x = x, label = year), color = "white")+ #Add annotation, white font color
   geom_text(x = 1880, y = 1, hjust = 0, #Justify the axis
             label = glue("Global temperatures have increased by over {max_t_diff}\u00B0C since {min(t_data$year)}"), #Add title texts, Add template literal by glue function
