@@ -1,4 +1,4 @@
-library(tidyverse)
+library(tidyverse) #Package for data manipulation, visualisation https://www.tidyverse.org/packages/
 
 
 # 1. read_csv is a function in tidyverse. read.csv is a base r function
