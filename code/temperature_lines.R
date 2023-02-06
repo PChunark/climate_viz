@@ -7,8 +7,10 @@ t_diff <-
   # Tidy dataframe by converting month in 1 column accept for year
   #Pivot dataframe for all columns except for year column, Give a name of month column
   pivot_longer(-year, names_to = "month", values_to = "t_diff") %>%
-  drop_na() #Ignore NA value
-
+  drop_na() %>% #Ignore NA value
+  mutate(month = factor(month, levels = month.abb)) #Order months into numerical order rather than alphabit order, define month as a factor
+  
+  
 t_diff %>%
   ggplot(aes(x = month, y = t_diff, group = year, color = year)) +
   geom_line()
