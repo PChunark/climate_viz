@@ -1,4 +1,5 @@
-library(tidyverse)
+library(tidyverse) #Package for data manipulation, visualisation https://www.tidyverse.org/packages/
+library(scales) # Package for rescale the axis, legend
 
 # Initial plot
 read_csv("data/GLB.Ts+dSST.csv", skip = 1, na = "***") %>%
@@ -28,13 +29,19 @@ t_data %>%
   ggplot(aes(x = year, y = t_diff, fill = t_diff))+ # Provide x and y parameter, fill bars color
   geom_col() + #geom_bar generates a bar plot with summary build-in function, we dont need!!
   geom_text(data = annotation, aes(x = x, label = year), color = "white")+ #Add annotation, white font color
-  scale_fill_gradient2(low = "darkblue", mid = "white", high = "darkred", #Fill gradient color by specify the color
-                      midpoint = 0 # Specify the midpoint to be at zero
-                      )+
+ # scale_fill_gradient2(low = "darkblue", mid = "white", high = "darkred", #Fill gradient color by specify the color
+ #                     midpoint = 0, # Specify the midpoint to be at zero
+ #                     limits = c(-0.5, 1.5) # Provide the scale limit
+ #                     )+
+ # Compare how the function related to each others  
+  scale_fill_gradientn(colors = c("darkblue", "white", "darkred"), # Give color as a vector value
+                       values = rescale(c(min(t_data$t_diff), 0, max(t_data$t_diff))), #Re-scale values from 
+                       limits = c(min(t_data$t_diff), max(t_data$t_diff)) # Give what color go on each end
+                       )+
   theme_void() +
   theme(
-    plot.background = element_rect(fill = "black"),
-    legend.text = element_text(color = "white")
+    plot.background = element_rect(fill = "black"), #Fill in the background color
+    legend.text = element_text(color = "white") # Fill in text color
   )
 
 
