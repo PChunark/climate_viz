@@ -24,8 +24,8 @@ t_diff <-
   # Tidy dataframe by converting month in 1 column accept for year
   #Pivot dataframe for all columns except for year column, Give a name of month column
   pivot_longer(-year, names_to = "month", values_to = "t_diff") %>%
-  drop_na() %>% #Ignore NA value
-  mutate(month = factor(month, levels = month.abb)) #Order months into numerical order rather than alphabit order, define month as a factor
+  drop_na() #Ignore NA value
+  
 
 # Create 3 Separated dataframe
 # Create dataframe for preceding December
@@ -42,7 +42,8 @@ next_jan <-
   mutate(year = year + 1,    # Add extra year
          month = "next_Jan") # Rename it
 
-
-t_diff %>%
+#Combine 3 dataframes
+bind_rows(last_dec,t_diff,next_jan) %>%
+  mutate(month = factor(month, levels = c("last_Dec", month.abb, "next_Jan"))) %>% #Order months into numerical order rather than alphabit order, define month as a factor
   ggplot(aes(x = month, y = t_diff, group = year, color = year)) +
   geom_line()
