@@ -34,10 +34,16 @@ t_data %>%
  #                     limits = c(-0.5, 1.5) # Provide the scale limit
  #                     )+
  # Compare how the function related to each others  
-  scale_fill_gradientn(colors = c("darkblue", "white", "darkred"), # Give color as a vector value
+  # scale_fill_gradientn(colors = c("darkblue", "white", "darkred"), # Give color as a vector value
+  #                      values = rescale(c(min(t_data$t_diff), 0, max(t_data$t_diff))), #Re-scale values from 
+  #                      limits = c(min(t_data$t_diff), max(t_data$t_diff)) # Give what color go on each end
+  #                      )+
+  #The color is now in step not a gradient anymore
+  scale_fill_stepsn(colors = c("darkblue", "white", "darkred"), # Give color as a vector value
                        values = rescale(c(min(t_data$t_diff), 0, max(t_data$t_diff))), #Re-scale values from 
-                       limits = c(min(t_data$t_diff), max(t_data$t_diff)) # Give what color go on each end
-                       )+
+                       limits = c(min(t_data$t_diff), max(t_data$t_diff)), # Give what color go on each end
+                                  n.breaks = 7
+                    )+
   theme_void() +
   theme(
     plot.background = element_rect(fill = "black"), #Fill in the background color
