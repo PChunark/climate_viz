@@ -42,8 +42,8 @@ t_data %>%
   scale_fill_stepsn(colors = c("darkblue", "white", "darkred"), # Give color as a vector value
                        values = rescale(c(min(t_data$t_diff), 0, max(t_data$t_diff))), #Re-scale values from 
                        limits = c(min(t_data$t_diff), max(t_data$t_diff)), # Give what color go on each end
-                                  n.breaks = 7
-                    )+
+                                  n.breaks = 9
+                    ) +
   theme_void() +
   theme(
     plot.background = element_rect(fill = "black"), #Fill in the background color
