@@ -54,7 +54,8 @@ bind_rows(last_dec,t_diff,next_jan) %>%
                      sec.axis = dup_axis(name = NULL, labels = NULL)) +
   scale_y_continuous(breaks = seq(-2,2,0.2), sec.axis = dup_axis(name = NULL, labels = NULL)) + #Rescale y axis
   scale_color_viridis_c(breaks = seq(1880,2020,20), #Change the color to continuous scale. Re-scale the legend
-                        guide = guide_colorbar(frame.colour = "white")) + #Add white border around the legend 
+                        guide = guide_colorbar(frame.colour = "white",
+                                               frame.linewidth = 1)) + #Add white border around the legend 
   coord_cartesian(xlim = c(1,12)) +
   labs(x = NULL, # Add label
       y = "Temperature change since pre-industrial time [\u00B0C]",
