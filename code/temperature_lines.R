@@ -53,7 +53,8 @@ bind_rows(last_dec,t_diff,next_jan) %>%
                      labels = month.abb,
                      sec.axis = dup_axis(name = NULL, labels = NULL)) +
   scale_y_continuous(breaks = seq(-2,2,0.2), sec.axis = dup_axis(name = NULL, labels = NULL)) + #Rescale y axis
-  scale_color_viridis_c(breaks = seq(1880,2020,20))+ #Change the color to continuous scale. Re-scale the legend
+  scale_color_viridis_c(breaks = seq(1880,2020,20), #Change the color to continuous scale. Re-scale the legend
+                        guide = guide_colorbar(frame.colour = "white")) + #Add white border around the legend 
   coord_cartesian(xlim = c(1,12)) +
   labs(x = NULL, # Add label
       y = "Temperature change since pre-industrial time [\u00B0C]",
@@ -69,7 +70,8 @@ bind_rows(last_dec,t_diff,next_jan) %>%
     plot.title = element_text(color = "white", hjust = 0.5, size = 15),
     legend.title = element_blank(), # Remove legend title
     legend.background = element_rect(fill = NA),
-    legend.text = element_text(color = "white")
+    legend.text = element_text(color = "white"),
+    legend.key.height = unit(55, "pt") #Adjust the legend height
   )
 
 ggsave("figures/temperature_lines.png", width = 8, height = 4.5)
