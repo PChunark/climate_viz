@@ -50,8 +50,9 @@ bind_rows(last_dec,t_diff,next_jan) %>%
   geom_hline(yintercept = 0, color = "white") + # Add white line at 0 y intercept
   geom_line()+
   scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
-                     labels = month.abb) +
-  scale_y_continuous(breaks = seq(-2,2,0.2)) + #Rescale y axis
+                     labels = month.abb,
+                     sec.axis = dup_axis(name = NULL, labels = NULL)) +
+  scale_y_continuous(breaks = seq(-2,2,0.2), sec.axis = dup_axis(name = NULL, labels = NULL)) + #Rescale y axis
   scale_color_viridis_c()+ #Change the color to continuous scale
   coord_cartesian(xlim = c(1,12)) +
   theme(
