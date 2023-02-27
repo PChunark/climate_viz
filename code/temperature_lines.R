@@ -51,4 +51,8 @@ bind_rows(last_dec,t_diff,next_jan) %>%
   scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
                      labels = month.abb) +
   scale_color_viridis_c()+ #Change the color to continuous scale
-  coord_cartesian(xlim = c(1,12))
+  coord_cartesian(xlim = c(1,12)) +
+  theme(
+    panel.background = element_rect(fill = "black"),
+    plot.background = element_rect(fill = "#444444")
+  )
