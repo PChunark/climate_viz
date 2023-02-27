@@ -68,7 +68,8 @@ bind_rows(last_dec,t_diff,next_jan) %>%
     axis.title = element_text(color = "white", size = 13),
     plot.title = element_text(color = "white", hjust = 0.5, size = 15),
     legend.title = element_blank(), # Remove legend title
-    legend.background = element_rect(fill = NA)
+    legend.background = element_rect(fill = NA),
+    legend.text = element_text(color = "white")
   )
 
 ggsave("figures/temperature_lines.png", width = 8, height = 4.5)
