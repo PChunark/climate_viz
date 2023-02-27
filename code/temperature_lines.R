@@ -32,14 +32,14 @@ t_diff <-
 last_dec <-
   t_diff %>%
   filter(month == "Dec") %>% #Filter December
-  mutate(year = year - 1,   #Calculate preceding year by using the original data
+  mutate(year = year + 1,   #Calculate preceding year by using the original data
          month = "last_Dec") #Rename Dec to last_Dec
 
 #Create dataframe for next Jan
 next_jan <-
   t_diff %>%
   filter(month == "Jan") %>% #Filter January
-  mutate(year = year + 1,    # Add extra year
+  mutate(year = year - 1,    # Add extra year
          month = "next_Jan") # Rename it
 
 #Combine 3 dataframes
