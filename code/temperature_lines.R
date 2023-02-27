@@ -54,5 +54,6 @@ bind_rows(last_dec,t_diff,next_jan) %>%
   coord_cartesian(xlim = c(1,12)) +
   theme(
     panel.background = element_rect(fill = "black"),
-    plot.background = element_rect(fill = "#444444")
+    plot.background = element_rect(fill = "#444444"),
+    panel.grid = element_blank() # Remove grid line color
   )
