@@ -58,6 +58,6 @@ bind_rows(last_dec,t_diff,next_jan) %>%
     panel.background = element_rect(fill = "black"),
     plot.background = element_rect(fill = "#444444"),
     panel.grid = element_blank(), # Remove grid line color
-    axis.text = element_text(color = "white") # Add color text
-    
+    axis.text = element_text(color = "white"), # Add color text
+    axis.ticks = element_line(color = "white") # Change tick mark color
   )
