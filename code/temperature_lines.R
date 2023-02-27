@@ -48,6 +48,6 @@ bind_rows(last_dec,t_diff,next_jan) %>%
          month_number = as.numeric(month)-1) %>% #Change the scale in x axis to number from 0-13. Factor is a vector of character. It is stored as an order. We use as.numeric to return factor to number
   ggplot(aes(x = month_number, y = t_diff, group = year, color = year)) +
   geom_line()+
-  scale_x_continuous(breaks = 1:12,
+  scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
                      labels = month.abb) +
   coord_cartesian(xlim = c(1,12))
