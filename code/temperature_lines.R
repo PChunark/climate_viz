@@ -55,7 +55,7 @@ bind_rows(last_dec,t_diff,next_jan) %>%
   scale_color_viridis_c()+ #Change the color to continuous scale
   coord_cartesian(xlim = c(1,12)) +
   theme(
-    panel.background = element_rect(fill = "black", color = "white"), #Add black color and white border
+    panel.background = element_rect(fill = "black", color = "white", size = 1), #Add black color and white border. Increase border line size
     plot.background = element_rect(fill = "#444444"),
     panel.grid = element_blank(), # Remove grid line color
     axis.text = element_text(color = "white"), # Add color text
