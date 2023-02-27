@@ -55,11 +55,16 @@ bind_rows(last_dec,t_diff,next_jan) %>%
   scale_y_continuous(breaks = seq(-2,2,0.2), sec.axis = dup_axis(name = NULL, labels = NULL)) + #Rescale y axis
   scale_color_viridis_c()+ #Change the color to continuous scale
   coord_cartesian(xlim = c(1,12)) +
+  labs(x = NULL, # Add label
+      y = "Temperature change since pre-industrial time [\u00B0C]",
+      title = "Global temperature change since 1880") + 
   theme(
     panel.background = element_rect(fill = "black", color = "white", size = 1), #Add black color and white border. Increase border line size
     plot.background = element_rect(fill = "#444444"),
     panel.grid = element_blank(), # Remove grid line color
     axis.text = element_text(color = "white"), # Add color text
     axis.ticks = element_line(color = "white"), # Change tick mark color
-    axis.ticks.length = unit(-5, "pt") #Put tick mark into the plot by 5 points
+    axis.ticks.length = unit(-5, "pt"), #Put tick mark into the plot by 5 points
+    axis.title = element_text(color = "white"),
+    plot.title = element_text(color = "white")
   )
