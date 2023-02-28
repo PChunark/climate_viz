@@ -35,7 +35,7 @@ t_diff <-
 #   mutate(year = year + 1,   #Calculate preceding year by using the original data
 #          month = "last_Dec") #Rename Dec to last_Dec
 
-Create dataframe for next Jan
+# Create dataframe for next Jan
 next_jan <-
   t_diff %>%
   filter(month == "Jan") %>% #Filter January
