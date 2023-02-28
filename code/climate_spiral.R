@@ -80,11 +80,8 @@ t_data <-
     axis.ticks = element_line(color = "white"), # Change tick mark color
     axis.ticks.length = unit(-5, "pt"), #Put tick mark into the plot by 5 points
     axis.title = element_text(color = "white", size = 13),
-    plot.title = element_text(color = "white", hjust = 0.5, size = 15),
-    legend.title = element_blank(), # Remove legend title
-    legend.background = element_rect(fill = NA),
-    legend.text = element_text(color = "white"),
-    legend.key.height = unit(55, "pt") #Adjust the legend height
+    plot.title = element_text(color = "white", hjust = 0.5, size = 15)
   )
+    
 
 ggsave("figures/climate_spiral.png", width = 8, height = 4.5)
