@@ -78,8 +78,7 @@ t_data <-
     axis.text = element_text(color = "white", size = 13), # Add color text
     axis.text.y = element_blank(),
     axis.title.y = element_blank(),
-    # axis.ticks = element_line(color = "white"), # Change tick mark color
-    # axis.ticks.length = unit(-5, "pt"), #Put tick mark into the plot by 5 points
+    axis.ticks = element_blank(),
     axis.title = element_text(color = "white", size = 13),
     plot.title = element_text(color = "white", hjust = 0.5, size = 15)
   )
