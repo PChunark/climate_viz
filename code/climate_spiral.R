@@ -94,9 +94,11 @@ month_label <-
             angle = seq(360-360/12, 0, length.out = 12)) + #Assign angle to the month label  
   scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
                      labels = month.abb,
+                     expand = c(0,0),
                      sec.axis = dup_axis(name = NULL, labels = NULL)) +
   scale_y_continuous(breaks = seq(-2,2,0.2),
                      limits = c(-2,2.7),
+                     expand = c(0,-0.7), # expand grid. First is an addition. Second is an multiplication.
                      sec.axis = dup_axis(name = NULL, labels = NULL)) + #Rescale y axis
    scale_color_viridis_c(breaks = seq(1880,2020,20), #Change the color to continuous scale. Re-scale the legend
                         guide = "none") + #Remove legend 
@@ -108,7 +110,7 @@ month_label <-
   theme(
     panel.background = element_rect(fill = "#444444", size = 1), #Add black color and white border. Increase border line size
     plot.background = element_rect(fill = "#444444", color = "#444444"),
-    # panel.grid = element_blank(), # Remove grid line color
+    panel.grid = element_blank(), # Remove grid line color
     axis.text.x = element_blank(),
     axis.text.y = element_blank(),
     axis.title.y = element_blank(),
