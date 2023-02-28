@@ -74,7 +74,7 @@ month_label <-
              y = t_diff, 
              group = year, color = year)) +
   geom_col(data = month_label, #Add black circle background
-           aes(x = x + 0.5, y = 2.2),
+           aes(x = x + 0.5, y = 2.4),
            fill = "black",
            width = 1, #Adjust space between columns. Default value is 0.9
            inherit.aes = FALSE) +
