@@ -35,18 +35,17 @@ t_diff <-
 #   mutate(year = year + 1,   #Calculate preceding year by using the original data
 #          month = "last_Dec") #Rename Dec to last_Dec
 
-#Create dataframe for next Jan
-# next_jan <-
-#   t_diff %>%
-#   filter(month == "Jan") %>% #Filter January
-#   mutate(year = year - 1,    # Add extra year
-#          month = "next_Jan") # Rename it
+Create dataframe for next Jan
+next_jan <-
+  t_diff %>%
+  filter(month == "Jan") %>% #Filter January
+  mutate(year = year - 1,    # Add extra year
+         month = "next_Jan") # Rename it
 
 #Combine 3 dataframes
 t_data <- 
-  t_diff %>%
-  # bind_rows(last_dec,t_diff,next_jan) %>%
-  mutate(month = factor(month, levels = c("last_Dec", month.abb, "next_Jan")), #Order months into numerical order rather than alphabet order, define month as a factor
+  bind_rows(t_diff,next_jan) %>%
+  mutate(month = factor(month, levels = c(month.abb, "next_Jan")), #Order months into numerical order rather than alphabet order, define month as a factor
          month_number = as.numeric(month)-1) #Change the scale in x axis to number from 0-13. Factor is a vector of character. It is stored as an order. We use as.numeric to return factor to number
          
   
