@@ -66,13 +66,18 @@ month_label <-
   tibble(
     x = 1:12,
     labels = month.abb,
-    y = 2.4
+    y = 2.5
   )
 
  
   t_data %>% ggplot(aes(x = month_number, 
              y = t_diff, 
-             group = year, color = year)) + 
+             group = year, color = year)) +
+  geom_col(data = month_label, #Add black circle backgroud 
+           aes(x = x, y = 2.2), 
+           fill = "black",
+           width = 1, #Adjust space between columns. Default value is 0.9
+           inherit.aes = FALSE) + 
   geom_hline(yintercept = c(1.5, 2.0), color = "red") + # Add white line at 1.5 and 2.0 y intercept
   geom_line()+
   geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring 
@@ -86,7 +91,7 @@ month_label <-
                      labels = month.abb,
                      sec.axis = dup_axis(name = NULL, labels = NULL)) +
   scale_y_continuous(breaks = seq(-2,2,0.2),
-                     limits = c(-2,2.4),
+                     limits = c(-2,2.5),
                      sec.axis = dup_axis(name = NULL, labels = NULL)) + #Rescale y axis
    scale_color_viridis_c(breaks = seq(1880,2020,20), #Change the color to continuous scale. Re-scale the legend
                         guide = "none") + #Remove legend 
@@ -96,7 +101,7 @@ month_label <-
       y = NULL,
       title = "Global temperature change (1880-2022)") + 
   theme(
-    panel.background = element_rect(fill = "black", size = 1), #Add black color and white border. Increase border line size
+    panel.background = element_rect(fill = "#444444", size = 1), #Add black color and white border. Increase border line size
     plot.background = element_rect(fill = "#444444", color = "#444444"),
     panel.grid = element_blank(), # Remove grid line color
     axis.text.x = element_blank(),
