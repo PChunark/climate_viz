@@ -60,6 +60,15 @@ temp_line <- #Create text at specific position
     y = c(1.5, 2.0),
     labels = c("1.5\u00B0C", "2.0\u00B0C")
   )
+
+#Create dataframe for tangential month to the ciricle
+month_label <-
+  tibble(
+    x = 1:12,
+    labels = month.abb,
+    y = 2.4
+  )
+
  
   t_data %>% ggplot(aes(x = month_number, 
              y = t_diff, 
