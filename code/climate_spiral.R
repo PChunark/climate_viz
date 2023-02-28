@@ -77,12 +77,14 @@ month_label <-
   geom_line()+
   geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring 
              color = "red", fill = "black", label.size = 0,
-             inherit.aes = FALSE)+  
+             inherit.aes = FALSE)+ 
+  geom_text(data = month_label, aes(x = x, y = y, label = labels), color = "white",
+            inherit.aes = FALSE) +   
   scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
                      labels = month.abb,
                      sec.axis = dup_axis(name = NULL, labels = NULL)) +
   scale_y_continuous(breaks = seq(-2,2,0.2),
-                     limits = c(-2,2),
+                     limits = c(-2,2.4),
                      sec.axis = dup_axis(name = NULL, labels = NULL)) + #Rescale y axis
    scale_color_viridis_c(breaks = seq(1880,2020,20), #Change the color to continuous scale. Re-scale the legend
                         guide = "none") + #Remove legend 
