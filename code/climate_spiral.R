@@ -73,7 +73,7 @@ t_data <-
       title = "Global temperature change (1880-2022)") + 
   theme(
     panel.background = element_rect(fill = "black", size = 1), #Add black color and white border. Increase border line size
-    plot.background = element_rect(fill = "#444444"),
+    plot.background = element_rect(fill = "#444444", color = "#444444"),
     panel.grid = element_blank(), # Remove grid line color
     axis.text = element_text(color = "white", size = 13), # Add color text
     axis.text.y = element_blank(),
