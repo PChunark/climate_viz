@@ -67,7 +67,7 @@ temp_line <- #Create text at specific position
   geom_hline(yintercept = c(1.5, 2.0), color = "red") + # Add white line at 1.5 and 2.0 y intercept
   geom_line()+
   geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring 
-             color = "red",
+             color = "red", fill = "black", label.size = 0,
              inherit.aes = FALSE)+  
   scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
                      labels = month.abb,
