@@ -1,4 +1,5 @@
 library(tidyverse)
+library(gganimate)
 
 # 1. First plot
 t_diff <- 
