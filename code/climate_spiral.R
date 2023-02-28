@@ -64,7 +64,7 @@ temp_line <- #Create text at specific position
   t_data %>% ggplot(aes(x = month_number, 
              y = t_diff, 
              group = year, color = year)) + 
-  geom_hline(yintercept = c(1.5, 2.0), color = "red") + # Add white line at 0 y intercept
+  geom_hline(yintercept = c(1.5, 2.0), color = "red") + # Add white line at 1.5 and 2.0 y intercept
   geom_line()+
   geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring 
              color = "red",
