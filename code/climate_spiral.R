@@ -76,8 +76,8 @@ t_data <-
     plot.background = element_rect(fill = "#444444"),
     panel.grid = element_blank(), # Remove grid line color
     axis.text = element_text(color = "white", size = 13), # Add color text
-    axis.ticks = element_line(color = "white"), # Change tick mark color
-    axis.ticks.length = unit(-5, "pt"), #Put tick mark into the plot by 5 points
+    # axis.ticks = element_line(color = "white"), # Change tick mark color
+    # axis.ticks.length = unit(-5, "pt"), #Put tick mark into the plot by 5 points
     axis.title = element_text(color = "white", size = 13),
     plot.title = element_text(color = "white", hjust = 0.5, size = 15)
   )
