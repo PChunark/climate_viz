@@ -81,7 +81,7 @@ month_label <-
   geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
             color = "white",
             inherit.aes = FALSE,
-            angle = seq(0, 360, length.out = 12)) + #Assign angle to the month label  
+            angle = seq(360-360/12, 0, length.out = 12)) + #Assign angle to the month label  
   scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
                      labels = month.abb,
                      sec.axis = dup_axis(name = NULL, labels = NULL)) +
