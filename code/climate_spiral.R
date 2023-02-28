@@ -49,10 +49,10 @@ t_data <-
          month_number = as.numeric(month)) #Remove previous December to remove zero from dataframe
          
   
-  # annotation <-
-  #   t_data %>% #create new dataframe from 2022
-  #   filter(year == 2022) %>%
-  #   slice_max(month_number)
+  annotation <-
+    t_data %>% #create new dataframe from 2022
+    filter(year == 2022) %>%
+    slice_max(month_number)
  
 temp_line <- #Create text at specific position
   tibble(
@@ -85,6 +85,8 @@ month_label <-
            inherit.aes = FALSE) +
   geom_hline(yintercept = c(1.5, 2.0), color = "red") + # Add white line at 1.5 and 2.0 y intercept
   geom_line()+
+  geom_point(data = annotation, aes(x = month_number, y = t_diff, color = year),
+             inherit.aes = FALSE) + 
   geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring 
              color = "red", fill = "black", label.size = 0,
              inherit.aes = FALSE)+ 
