@@ -69,14 +69,15 @@ t_data <-
   # coord_cartesian(xlim = c(1,12)) +
   coord_polar()+  
   labs(x = NULL, # Add label
-      y = "Temperature change since pre-industrial time [\u00B0C]",
-      title = "Global temperature change since 1880 by month") + 
+      y = NULL,
+      title = "Global temperature change (1880-2022)") + 
   theme(
     panel.background = element_rect(fill = "black", color = "white", size = 1), #Add black color and white border. Increase border line size
     plot.background = element_rect(fill = "#444444"),
     panel.grid = element_blank(), # Remove grid line color
     axis.text = element_text(color = "white", size = 13), # Add color text
     axis.text.y = element_blank(),
+    axis.title.y = element_blank(),
     # axis.ticks = element_line(color = "white"), # Change tick mark color
     # axis.ticks.length = unit(-5, "pt"), #Put tick mark into the plot by 5 points
     axis.title = element_text(color = "white", size = 13),
