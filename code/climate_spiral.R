@@ -68,7 +68,8 @@ t_data <-
    scale_color_viridis_c(breaks = seq(1880,2020,20), #Change the color to continuous scale. Re-scale the legend
                         guide = guide_colorbar(frame.colour = "white",
                                                frame.linewidth = 1)) + #Add white border around the legend 
-  coord_cartesian(xlim = c(1,12)) +
+  # coord_cartesian(xlim = c(1,12)) +
+  coord_polar()+  
   labs(x = NULL, # Add label
       y = "Temperature change since pre-industrial time [\u00B0C]",
       title = "Global temperature change since 1880 by month") + 
