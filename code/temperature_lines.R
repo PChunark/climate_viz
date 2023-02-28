@@ -66,7 +66,8 @@ t_data <-
                 label = year, 
                 color = year), 
             inherit.aes = FALSE,
-            hjust = 0, size = 5) + 
+            hjust = 0, size = 5,
+            nudge_x = 0.1, fontface = "bold") + 
   scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
                      labels = month.abb,
                      sec.axis = dup_axis(name = NULL, labels = NULL)) +
