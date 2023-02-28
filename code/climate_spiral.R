@@ -108,7 +108,7 @@ month_label <-
   theme(
     panel.background = element_rect(fill = "#444444", size = 1), #Add black color and white border. Increase border line size
     plot.background = element_rect(fill = "#444444", color = "#444444"),
-    panel.grid = element_blank(), # Remove grid line color
+    # panel.grid = element_blank(), # Remove grid line color
     axis.text.x = element_blank(),
     axis.text.y = element_blank(),
     axis.title.y = element_blank(),
