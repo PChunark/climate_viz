@@ -29,22 +29,23 @@ t_diff <-
 
 # Create 3 Separated dataframe
 # Create dataframe for preceding December
-last_dec <-
-  t_diff %>%
-  filter(month == "Dec") %>% #Filter December
-  mutate(year = year + 1,   #Calculate preceding year by using the original data
-         month = "last_Dec") #Rename Dec to last_Dec
+# last_dec <-
+#   t_diff %>%
+#   filter(month == "Dec") %>% #Filter December
+#   mutate(year = year + 1,   #Calculate preceding year by using the original data
+#          month = "last_Dec") #Rename Dec to last_Dec
 
 #Create dataframe for next Jan
-next_jan <-
-  t_diff %>%
-  filter(month == "Jan") %>% #Filter January
-  mutate(year = year - 1,    # Add extra year
-         month = "next_Jan") # Rename it
+# next_jan <-
+#   t_diff %>%
+#   filter(month == "Jan") %>% #Filter January
+#   mutate(year = year - 1,    # Add extra year
+#          month = "next_Jan") # Rename it
 
 #Combine 3 dataframes
 t_data <- 
-  bind_rows(last_dec,t_diff,next_jan) %>%
+  t_diff %>%
+  # bind_rows(last_dec,t_diff,next_jan) %>%
   mutate(month = factor(month, levels = c("last_Dec", month.abb, "next_Jan")), #Order months into numerical order rather than alphabet order, define month as a factor
          month_number = as.numeric(month)-1, #Change the scale in x axis to number from 0-13. Factor is a vector of character. It is stored as an order. We use as.numeric to return factor to number
          this_year = year == 2022) # Create new column for data pointer
