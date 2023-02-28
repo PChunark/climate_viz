@@ -47,8 +47,8 @@ t_data <-
   t_diff %>%
   # bind_rows(last_dec,t_diff,next_jan) %>%
   mutate(month = factor(month, levels = c("last_Dec", month.abb, "next_Jan")), #Order months into numerical order rather than alphabet order, define month as a factor
-         month_number = as.numeric(month)-1, #Change the scale in x axis to number from 0-13. Factor is a vector of character. It is stored as an order. We use as.numeric to return factor to number
-         this_year = year == 2022) # Create new column for data pointer
+         month_number = as.numeric(month)-1) #Change the scale in x axis to number from 0-13. Factor is a vector of character. It is stored as an order. We use as.numeric to return factor to number
+         
   
   # annotation <-
   #   t_data %>% #create new dataframe from 2022
