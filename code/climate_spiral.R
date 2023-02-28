@@ -95,6 +95,7 @@ month_label <-
             color = "white",
             inherit.aes = FALSE,
             angle = seq(360-360/12, 0, length.out = 12)) + #Assign angle to the month label  
+  geom_text(aes(x = 1, y = -1.3, label = "2022"), color = "white") +
   scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
                      labels = month.abb,
                      expand = c(0,0),
