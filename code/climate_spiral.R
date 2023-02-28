@@ -57,7 +57,7 @@ t_data <-
   t_data %>% ggplot(aes(x = month_number, 
              y = t_diff, 
              group = year, color = year)) + 
-  geom_hline(yintercept = 0, color = "white") + # Add white line at 0 y intercept
+  geom_hline(yintercept = c(1.5, 2.0), color = "red") + # Add white line at 0 y intercept
   geom_line()+
   scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
                      labels = month.abb,
