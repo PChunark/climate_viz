@@ -50,10 +50,10 @@ t_data <-
          month_number = as.numeric(month)-1, #Change the scale in x axis to number from 0-13. Factor is a vector of character. It is stored as an order. We use as.numeric to return factor to number
          this_year = year == 2022) # Create new column for data pointer
   
-  annotation <-
-    t_data %>% #create new dataframe from 2022
-    filter(year == 2022) %>%
-    slice_max(month_number)
+  # annotation <-
+  #   t_data %>% #create new dataframe from 2022
+  #   filter(year == 2022) %>%
+  #   slice_max(month_number)
   
   t_data %>% ggplot(aes(x = month_number, 
              y = t_diff, 
