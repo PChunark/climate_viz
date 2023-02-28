@@ -46,7 +46,7 @@ next_jan <-
 t_data <- 
   bind_rows(t_diff,next_jan) %>%
   mutate(month = factor(month, levels = c(month.abb, "next_Jan")), #Order months into numerical order rather than alphabet order, define month as a factor
-         month_number = as.numeric(month)-1) #Change the scale in x axis to number from 0-13. Factor is a vector of character. It is stored as an order. We use as.numeric to return factor to number
+         month_number = as.numeric(month)) #Remove previous December to remove zero from dataframe
          
   
   # annotation <-
@@ -73,11 +73,11 @@ month_label <-
   t_data %>% ggplot(aes(x = month_number, 
              y = t_diff, 
              group = year, color = year)) +
-  geom_col(data = month_label, #Add black circle backgroud 
-           aes(x = x, y = 2.2), 
-           fill = "black",
-           width = 1, #Adjust space between columns. Default value is 0.9
-           inherit.aes = FALSE) + 
+  # geom_col(data = month_label, #Add black circle backgroud 
+  #          aes(x = x, y = 2.2), 
+  #          fill = "black",
+  #          width = 1, #Adjust space between columns. Default value is 0.9
+  #          inherit.aes = FALSE) + 
   geom_hline(yintercept = c(1.5, 2.0), color = "red") + # Add white line at 1.5 and 2.0 y intercept
   geom_line()+
   geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring 
