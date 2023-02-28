@@ -74,10 +74,7 @@ t_data <-
                      sec.axis = dup_axis(name = NULL, labels = NULL)) +
   scale_y_continuous(breaks = seq(-2,2,0.2), 
                      sec.axis = dup_axis(name = NULL, labels = NULL)) + #Rescale y axis
-  scale_size_manual(breaks = c(FALSE,TRUE),
-                    values = c(0.25, 1), # Add size for this_year column
-                    guide = "none") + #Remove legend
-  scale_color_viridis_c(breaks = seq(1880,2020,20), #Change the color to continuous scale. Re-scale the legend
+   scale_color_viridis_c(breaks = seq(1880,2020,20), #Change the color to continuous scale. Re-scale the legend
                         guide = guide_colorbar(frame.colour = "white",
                                                frame.linewidth = 1)) + #Add white border around the legend 
   coord_cartesian(xlim = c(1,12)) +
