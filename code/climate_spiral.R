@@ -96,7 +96,7 @@ month_label <-
    scale_color_viridis_c(breaks = seq(1880,2020,20), #Change the color to continuous scale. Re-scale the legend
                         guide = "none") + #Remove legend 
   # coord_cartesian(xlim = c(1,12)) +
-  coord_polar()+  
+  coord_polar(start = 2*pi/12)+ #Set polar 5 minutes off. "start" measures thing in radius 
   labs(x = NULL, # Add label
       y = NULL,
       title = "Global temperature change (1880-2022)") + 
