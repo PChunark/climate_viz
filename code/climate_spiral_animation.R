@@ -134,4 +134,4 @@ month_label <-
   transition_reveal(along = step_number)  #Add data and keep the old data in gganimate only
     
 
-ggsave("figures/climate_spiral.png", width = 8, height = 4.5)
+anim_save("figures/climate_spiral.gif")
