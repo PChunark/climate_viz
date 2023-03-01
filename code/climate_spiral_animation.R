@@ -120,9 +120,10 @@ a <-  t_data %>% ggplot(aes(x = month_number,
     axis.title = element_text(color = "white", size = 13),
     plot.title = element_text(color = "white", hjust = 0.5, size = 15)
   )+
-  transition_reveal(along = step_number)  #Add data and keep the old data in gganimate only
+  transition_manual(frames = year, cumulative = TRUE)  #Add data and keep the old data in gganimate only
     
 animate(a, width = 4.155, height = 4.5, unit = "in", res = 300,
-        nframes = nrow(t_data),
-        fps = nrow(t_data)/12/60/60)
+        # nframes = nrow(t_data),
+        # fps = nrow(t_data)/12/60/60
+        )
 anim_save("figures/climate_spiral.gif")
