@@ -76,7 +76,8 @@ month_label <-
  
   t_data %>% ggplot(aes(x = month_number, 
              y = t_diff, 
-             group = year, color = year)) +
+             group = year, 
+             color = year)) +
   # geom_col(data = month_label, #Add black circle background
   #          aes(x = x + 0.5, y = 2.4),
   #          fill = "black",
@@ -101,7 +102,7 @@ month_label <-
   geom_line()+
 
 
-  # geom_text(aes(x = 1, y = -1.3, label = "2022"), color = "white") +
+  geom_text(aes(x = 1, y = -1.3, label = year), color = "white") +
   scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
                      labels = month.abb,
                      expand = c(0,0),
@@ -112,7 +113,6 @@ month_label <-
                      sec.axis = dup_axis(name = NULL, labels = NULL)) + #Rescale y axis
    scale_color_viridis_c(breaks = seq(1880,2020,20), #Change the color to continuous scale. Re-scale the legend
                         guide = "none") + #Remove legend 
-  # coord_cartesian(xlim = c(1,12)) +
   coord_polar(start = 2*pi/12)+ #Set polar 5 minutes off. "start" measures thing in radius 
   labs(x = NULL, # Add label
       y = NULL,
