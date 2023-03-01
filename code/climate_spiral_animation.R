@@ -78,7 +78,7 @@ month_label <-
              y = t_diff, 
              group = year, 
              color = year)) +
-    geom_rect(aes(xmin = 1, xmax = 13, ymin = -2, ymax = 2), # create black circle background
+    geom_rect(aes(xmin = 1, xmax = 13, ymin = -2, ymax = 2.4), # create black circle background
               color = "black", fill = "black",
               inherit.aes = FALSE)+ 
   # geom_col(data = month_label, #Add black circle background
@@ -103,7 +103,7 @@ month_label <-
   geom_line()+
 
 
-  geom_text(aes(x = 1, y = -1.3, label = year), color = "white") +
+  geom_label(aes(x = 1, y = -1.3, label = year), color = "red") +
   scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
                      labels = month.abb,
                      expand = c(0,0),
