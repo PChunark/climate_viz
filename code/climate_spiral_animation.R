@@ -55,7 +55,7 @@ t_data <-
   
   annotation <-
     t_data %>% #create new dataframe from 2022
-    filter(year == 2022) %>%
+    slice_max(year) %>%
     slice_max(month_number)
  
 temp_line <- #Create text at specific position
@@ -78,6 +78,7 @@ month_label <-
              y = t_diff, 
              group = year, 
              color = year)) +
+    geom_rect(aes(xmin = 1, xmax = 13, ymin = -2, ymax = 2))+
   # geom_col(data = month_label, #Add black circle background
   #          aes(x = x + 0.5, y = 2.4),
   #          fill = "black",
@@ -88,17 +89,15 @@ month_label <-
   #          fill = "black",
   #          width = 1, #Adjust space between columns. Default value is 0.9
   #          inherit.aes = FALSE) +
-  # geom_hline(yintercept = c(1.5, 2.0), color = "red") + # Add white line at 1.5 and 2.0 y intercept
-  # geom_point(data = annotation, aes(x = month_number, y = t_diff, color = year),
-  #            size = 2,
-  #            inherit.aes = FALSE) + 
-  # geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring 
-  #            color = "red", fill = "black", label.size = 0,
-  #            inherit.aes = FALSE)+ 
-  # geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
-  #           color = "white",
-  #           inherit.aes = FALSE,
-  #           angle = seq(360-360/12, 0, length.out = 12)) + #Assign angle to the month label  
+  
+  geom_hline(yintercept = c(1.5, 2.0), color = "red") + # Add white line at 1.5 and 2.0 y intercept
+  geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
+             color = "red", fill = "black", label.size = 0,
+             inherit.aes = FALSE)+
+  geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
+            color = "white",
+            inherit.aes = FALSE,
+            angle = seq(360-360/12, 0, length.out = 12)) + #Assign angle to the month label
   geom_line()+
 
 
