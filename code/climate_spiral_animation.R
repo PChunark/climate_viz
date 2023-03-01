@@ -125,7 +125,8 @@ month_label <-
     axis.ticks = element_blank(),
     axis.title = element_text(color = "white", size = 13),
     plot.title = element_text(color = "white", hjust = 0.5, size = 15)
-  )
+  )+
+  transition_reveal(along = step_number)  #Add data and keep the old data in gganimate only
     
 
 ggsave("figures/climate_spiral.png", width = 8, height = 4.5)
