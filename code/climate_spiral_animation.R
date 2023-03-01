@@ -47,8 +47,10 @@ next_jan <-
 t_data <- 
   bind_rows(t_diff,next_jan) %>%
   mutate(month = factor(month, levels = c(month.abb, "next_Jan")), #Order months into numerical order rather than alphabet order, define month as a factor
-         month_number = as.numeric(month)) #Remove previous December to remove zero from dataframe
-         
+         month_number = as.numeric(month)) %>% #Remove previous December to remove zero from dataframe
+  arrange(year, month) %>% # arrange year and month       
+  filter(year != 1879) # we dont need 1879
+  
   
   annotation <-
     t_data %>% #create new dataframe from 2022
