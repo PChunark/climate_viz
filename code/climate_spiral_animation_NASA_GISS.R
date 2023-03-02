@@ -1,22 +1,9 @@
 library(tidyverse)
 library(gganimate)
 
-# 1. First plot
-t_diff <- 
-  read_csv("data/GLB.Ts+dSST.csv", skip = 1, na = "***") %>% #load CSV file, skip 1st rows, na value in the data is "***"
-  select(year = Year, month.abb) %>% #month.abb is constant R build-in. which is the same as our datatype
-  # Tidy dataframe by converting month in 1 column accept for year
-  #Pivot dataframe for all columns except for year column, Give a name of month column
-  pivot_longer(-year, names_to = "month", values_to = "t_diff") %>%
-  drop_na() %>% #Ignore NA value
-  mutate(month = factor(month, levels = month.abb)) #Order months into numerical order rather than alphabit order, define month as a factor
-  
-  
-t_diff %>%
-  ggplot(aes(x = month, y = t_diff, group = year, color = year)) +
-  geom_line()
 
-# 2. Second plot: There are data in preceding year and next year.
+
+# Plot: There are data in preceding year and next year.
 # Need to create 3 separated dataframes
 
 t_diff <- 
@@ -119,15 +106,17 @@ a <-  t_data %>% ggplot(aes(x = month_number,
     axis.ticks = element_blank(),
     axis.title = element_text(color = "white", size = 13),
     plot.title = element_text(color = "white", hjust = 0.5, size = 15)
-  )+
-  transition_manual(frames = year, cumulative = TRUE)  #Add data and keep the old data in gganimate only
-    
-animate(a, width = 4.155, height = 4.5, unit = "in", res = 300
-        # nframes = nrow(t_data),
-        # fps = nrow(t_data)/12/60/60
-        )
-anim_save("figures/climate_spiral.gif")
-
-animate(a, width = 4.155, height = 4.5, unit = "in", res = 300,
-        renderer = av_renderer("figures/climate_spiral.mp4")
-)
+  )#+
+  # transition_manual(frames = year, cumulative = TRUE)  #Add data and keep the old data in gganimate only
+   
+ggsave("figures/climate_spiral_nasa.png", width = 4.155, height = 4.5, unit = "in", dpi = 300)
+ 
+# animate(a, width = 4.155, height = 4.5, unit = "in", res = 300
+#         # nframes = nrow(t_data),
+#         # fps = nrow(t_data)/12/60/60
+#         )
+# anim_save("figures/climate_spiral.gif")
+# 
+# animate(a, width = 4.155, height = 4.5, unit = "in", res = 300,
+#         renderer = av_renderer("figures/climate_spiral.mp4")
+# )
