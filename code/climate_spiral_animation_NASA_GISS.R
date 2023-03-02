@@ -61,13 +61,14 @@ month_label <-
   )
 
  
-a <-  t_data %>% ggplot(aes(x = month_number, 
+# a <-  
+  t_data %>% ggplot(aes(x = month_number, 
              y = t_diff, 
              group = year, 
              color = year), inherit.aes = FALSE) +
-    geom_rect(aes(xmin = 1, xmax = 13, ymin = -2, ymax = 2.4), # create black circle background
-              color = "black", fill = "black",
-              inherit.aes = FALSE)+ 
+    # geom_rect(aes(xmin = 1, xmax = 13, ymin = -2, ymax = 2.4), # create black circle background
+    #           color = "black", fill = "black",
+    #           inherit.aes = FALSE)+ 
    geom_hline(yintercept = c(1.5, 2.0), color = "red") + # Add white line at 1.5 and 2.0 y intercept
   geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
              color = "red", fill = "black", label.size = 0,
@@ -78,7 +79,7 @@ a <-  t_data %>% ggplot(aes(x = month_number,
             angle = seq(360-360/12, 0, length.out = 12)) + #Assign angle to the month label
   geom_label(aes(x = 1, y = -1.3, label = year), 
                color = "white", fill = "black",
-               label.padding = unit(50, "pt"), label.size = 0,
+               label.size = 0,
                size = 6) +
   geom_line()+
 
@@ -97,8 +98,8 @@ a <-  t_data %>% ggplot(aes(x = month_number,
       y = NULL,
       title = "Global temperature change (1880-2022)") + 
   theme(
-    panel.background = element_rect(fill = "#444444", size = 1), #Add black color and white border. Increase border line size
-    plot.background = element_rect(fill = "#444444", color = "#444444"),
+    panel.background = element_rect(fill = "black"), #Add black color and white border. Increase border line size
+    plot.background = element_rect(fill = "black", color = "black"),
     panel.grid = element_blank(), # Remove grid line color
     axis.text.x = element_blank(),
     axis.text.y = element_blank(),
