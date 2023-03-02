@@ -56,7 +56,7 @@ temp_line <- #Create text at specific position
 month_label <-
   tibble(
     x = 1:12,
-    labels = month.abb,
+    labels = toupper(month.abb), #Convert month label to capital letters
     y = 2.7
   )
 
@@ -74,7 +74,7 @@ month_label <-
              color = "red", fill = "black", label.size = 0,
              inherit.aes = FALSE)+
   geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
-            color = "white",
+            color = "yellow",
             inherit.aes = FALSE#,
             #angle = seq(360-360/12, 0, length.out = 12) #Assign angle to the month label
             ) + 
@@ -94,7 +94,7 @@ month_label <-
                      sec.axis = dup_axis(name = NULL, labels = NULL)) + #Rescale y axis
    scale_color_viridis_c(breaks = seq(1880,2020,20), #Change the color to continuous scale. Re-scale the legend
                         guide = "none") + #Remove legend 
-  coord_polar(start = 2*pi/12)+ #Set polar 5 minutes off. "start" measures thing in radius 
+  coord_polar(start = 0)+ #Set polar 5 minutes off. "start" measures thing in radius 
   labs(x = NULL, # Add label
       y = NULL,
       title = NULL) + 
