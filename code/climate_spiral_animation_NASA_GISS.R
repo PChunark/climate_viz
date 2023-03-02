@@ -75,7 +75,7 @@ month_label <-
              inherit.aes = FALSE)+
    
   geom_label(aes(x = 1, y = -1.3, label = year),  #geom_label it provides a background
-               color = "white", fill = "black",
+               fill = "black",
                label.size = 0,
                size = 6) +
   geom_line()+
