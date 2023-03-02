@@ -65,7 +65,7 @@ month_label <-
   t_data %>% ggplot(aes(x = month_number, 
              y = t_diff, 
              group = year, 
-             color = year), inherit.aes = FALSE) +
+             color = t_diff), inherit.aes = FALSE) +
     # geom_rect(aes(xmin = 1, xmax = 13, ymin = -2, ymax = 2.4), # create black circle background
     #           color = "black", fill = "black",
     #           inherit.aes = FALSE)+ 
@@ -92,7 +92,7 @@ month_label <-
                      limits = c(-2,2.7),
                      expand = c(0,-0.7), # expand grid. First is an addition. Second is an multiplication.
                      sec.axis = dup_axis(name = NULL, labels = NULL)) + #Rescale y axis
-   scale_color_viridis_c(breaks = seq(1880,2020,20), #Change the color to continuous scale. Re-scale the legend
+  scale_color_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, #Change the color to continuous scale. Re-scale the legend
                         guide = "none") + #Remove legend 
   coord_polar(start = 0)+ #Set polar 5 minutes off. "start" measures thing in radius 
   labs(x = NULL, # Add label
