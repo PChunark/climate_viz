@@ -69,7 +69,7 @@ month_label <-
     # geom_rect(aes(xmin = 1, xmax = 13, ymin = -2, ymax = 2.4), # create black circle background
     #           color = "black", fill = "black",
     #           inherit.aes = FALSE)+ 
-   geom_hline(yintercept = c(1.5, 2.0), color = "red") + # Add white line at 1.5 and 2.0 y intercept
+  geom_hline(yintercept = c(-1, 0, 1), color = "yellow") + # Add white line at 1.5 and 2.0 y intercept
   geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
              color = "red", fill = "black", label.size = 0,
              inherit.aes = FALSE)+
