@@ -75,8 +75,9 @@ month_label <-
              inherit.aes = FALSE)+
   geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
             color = "white",
-            inherit.aes = FALSE,
-            angle = seq(360-360/12, 0, length.out = 12)) + #Assign angle to the month label
+            inherit.aes = FALSE#,
+            #angle = seq(360-360/12, 0, length.out = 12) #Assign angle to the month label
+            ) + 
   geom_label(aes(x = 1, y = -1.3, label = year), 
                color = "white", fill = "black",
                label.size = 0,
@@ -96,17 +97,16 @@ month_label <-
   coord_polar(start = 2*pi/12)+ #Set polar 5 minutes off. "start" measures thing in radius 
   labs(x = NULL, # Add label
       y = NULL,
-      title = "Global temperature change (1880-2022)") + 
+      title = NULL) + 
   theme(
     panel.background = element_rect(fill = "black"), #Add black color and white border. Increase border line size
     plot.background = element_rect(fill = "black", color = "black"),
     panel.grid = element_blank(), # Remove grid line color
     axis.text.x = element_blank(),
     axis.text.y = element_blank(),
-    axis.title.y = element_blank(),
     axis.ticks = element_blank(),
-    axis.title = element_text(color = "white", size = 13),
-    plot.title = element_text(color = "white", hjust = 0.5, size = 15)
+    axis.title = element_blank(),
+    plot.title = element_blank()
   )#+
   # transition_manual(frames = year, cumulative = TRUE)  #Add data and keep the old data in gganimate only
    
