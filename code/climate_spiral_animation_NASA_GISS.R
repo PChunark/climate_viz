@@ -73,21 +73,21 @@ month_label <-
   geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
              color = "red", fill = "black", label.size = 0,
              inherit.aes = FALSE)+
-  geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
-            color = "yellow",
-            inherit.aes = FALSE#,
-            #angle = seq(360-360/12, 0, length.out = 12) #Assign angle to the month label
-            ) + 
-  geom_label(aes(x = 1, y = -1.3, label = year), 
+   
+  geom_label(aes(x = 1, y = -1.3, label = year),  #geom_label it provides a background
                color = "white", fill = "black",
                label.size = 0,
                size = 6) +
   geom_line()+
-
-  scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
-                     labels = month.abb,
-                     expand = c(0,0),
-                     sec.axis = dup_axis(name = NULL, labels = NULL)) +
+  geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
+              color = "yellow",
+              inherit.aes = FALSE#,
+              #angle = seq(360-360/12, 0, length.out = 12) #Assign angle to the month label
+    ) +
+  # scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
+  #                    labels = month.abb,
+  #                    expand = c(0,0),
+  #                    sec.axis = dup_axis(name = NULL, labels = NULL)) +
   scale_y_continuous(breaks = seq(-2,2,0.2),
                      limits = c(-2,2.7),
                      expand = c(0,-0.7), # expand grid. First is an addition. Second is an multiplication.
