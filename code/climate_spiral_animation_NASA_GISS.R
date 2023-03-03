@@ -60,6 +60,14 @@ month_label <-
     y = 2.7
   )
 
+#Make dataframe for grid line and used in geom_segment
+gridlines <- 
+  tibble(
+    x = 1.5,
+    xend = 12.5,
+    y = c(1, 0, -1),
+    yend = y
+  )
  
 # a <-  
   t_data %>% ggplot(aes(x = month_number, 
@@ -75,9 +83,13 @@ month_label <-
                label.size = 0,
                size = 6) +
   geom_line()+
-  geom_hline(yintercept = c(-1, 0, 1), color = "yellow") + # Add yellow line at -1,0,1 y intercept
-  geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
-               color = "yellow", fill = "black", label.size = 0,
+  geom_segment(data = gridlines, # Add yellow line at -1,0,1 y intercept, use geom segment and make new dataframe
+               aes(x = x, y = y,
+                   xend = xend, yend = yend), 
+               color = "yellow",
+               inherit.aes = FALSE) + 
+  geom_text(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
+               color = "yellow",
                inherit.aes = FALSE)+
   geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
               color = "yellow",
