@@ -47,9 +47,9 @@ t_data <-
  
 temp_line <- #Create text at specific position
   tibble(
-    x = 12,
-    y = c(1.5, 2.0),
-    labels = c("1.5\u00B0C", "2.0\u00B0C")
+    x = 1,
+    y = c(1, 0, -1),
+    labels = c("+1\u00B0C","0\u00B0C", "-1.0\u00B0C")
   )
 
 #Create dataframe for tangential month to the ciricle
@@ -70,16 +70,15 @@ month_label <-
     # geom_rect(aes(xmin = 1, xmax = 13, ymin = -2, ymax = 2.4), # create black circle background
     #           color = "black", fill = "black",
     #           inherit.aes = FALSE)+ 
-  geom_hline(yintercept = c(-1, 0, 1), color = "yellow") + # Add yellow line at -1,0,1 y intercept
-  geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
-             color = "red", fill = "black", label.size = 0,
-             inherit.aes = FALSE)+
-   
-  geom_label(aes(x = 1, y = -1.3, label = year),  #geom_label it provides a background
+    geom_label(aes(x = 1, y = -1.3, label = year),  #geom_label it provides a background
                fill = "black",
                label.size = 0,
                size = 6) +
   geom_line()+
+  geom_hline(yintercept = c(-1, 0, 1), color = "yellow") + # Add yellow line at -1,0,1 y intercept
+  geom_label(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
+               color = "yellow", fill = "black", label.size = 0,
+               inherit.aes = FALSE)+
   geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
               color = "yellow",
               inherit.aes = FALSE#,
