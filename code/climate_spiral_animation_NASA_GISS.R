@@ -101,7 +101,7 @@ gridlines <-
   #                    expand = c(0,0),
   #                    sec.axis = dup_axis(name = NULL, labels = NULL)) +
   scale_y_continuous(limits = c(-1.5, 1.5),
-                     expand = c(0,-0.7) # expand grid. First is an addition. Second is an multiplication.
+                     #expand = c(0,-0.7) # expand grid. First is an addition. Second is an multiplication.
                      ) + #Rescale y axis
   scale_color_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, #Change the color to continuous scale. Re-scale the legend
                         guide = "none") + #Remove legend 
