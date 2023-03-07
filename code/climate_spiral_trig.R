@@ -69,15 +69,12 @@ gridlines <-
     yend = y
   )
  
- a <-  
+ #a <-  
   t_data %>% ggplot(aes(x = month_number, 
              y = t_diff, 
              group = year, 
              color = t_diff), #Let's coloring by temperature change. Previous version was colored by year
              inherit.aes = FALSE) +
-    # geom_rect(aes(xmin = 1, xmax = 13, ymin = -2, ymax = 2.4), # create black circle background
-    #           color = "black", fill = "black",
-    #           inherit.aes = FALSE)+ 
     geom_label(aes(x = 1, y = -1.7, label = year),  #geom_label it provides a text with background
                fill = "black",
                label.size = 0,
@@ -93,13 +90,7 @@ gridlines <-
                inherit.aes = FALSE)+
   geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
               color = "yellow",
-              inherit.aes = FALSE#,
-              #angle = seq(360-360/12, 0, length.out = 12) #Assign angle to the month label
-    ) +
-  # scale_x_continuous(breaks = 1:12, #Set x axis and its coordinator
-  #                    labels = month.abb,
-  #                    expand = c(0,0),
-  #                    sec.axis = dup_axis(name = NULL, labels = NULL)) +
+              inherit.aes = FALSE) +
   scale_y_continuous(limits = c(-2.0, 1.5),
                      expand = c(0,-0.3) # expand grid. First is an addition. Second is an multiplication.
                      ) + #Rescale y axis
@@ -118,14 +109,14 @@ gridlines <-
     axis.ticks = element_blank(),
     axis.title = element_blank(),
     plot.title = element_blank()
-  )+
-   transition_manual(frames = year, cumulative = TRUE)  #Add data and keep the old data in gganimate only
+  )#+
+   #transition_manual(frames = year, cumulative = TRUE)  #Add data and keep the old data in gganimate only
    
-ggsave("figures/climate_spiral_nasa.png", width = 4.155, height = 4.5, unit = "in", dpi = 300)
+ggsave("figures/climate_spiral_trig.png", width = 4.155, height = 4.5, unit = "in", dpi = 300)
  
-animate(a, width = 4.155, height = 4.5, unit = "in", res = 300)
-anim_save("figures/climate_spiral_nasa.gif")
+# animate(a, width = 4.155, height = 4.5, unit = "in", res = 300)
+# anim_save("figures/climate_spiral_trig.gif")
 
 # animate(a, width = 4.155, height = 4.5, unit = "in", res = 300,
-#         renderer = av_renderer("figures/climate_spiral.mp4")
+#         renderer = av_renderer("figures/climate_trig.mp4")
 # )
