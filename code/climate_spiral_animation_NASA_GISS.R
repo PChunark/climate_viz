@@ -78,7 +78,7 @@ gridlines <-
     # geom_rect(aes(xmin = 1, xmax = 13, ymin = -2, ymax = 2.4), # create black circle background
     #           color = "black", fill = "black",
     #           inherit.aes = FALSE)+ 
-    geom_label(aes(x = 1, y = -1.3, label = year),  #geom_label it provides a background
+    geom_label(aes(x = 1, y = -1.7, label = year),  #geom_label it provides a text with background
                fill = "black",
                label.size = 0,
                size = 6) +
