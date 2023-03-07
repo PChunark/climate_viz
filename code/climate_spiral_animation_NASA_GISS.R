@@ -69,7 +69,7 @@ gridlines <-
     yend = y
   )
  
-# a <-  
+ a <-  
   t_data %>% ggplot(aes(x = month_number, 
              y = t_diff, 
              group = year, 
@@ -118,17 +118,14 @@ gridlines <-
     axis.ticks = element_blank(),
     axis.title = element_blank(),
     plot.title = element_blank()
-  )#+
-  # transition_manual(frames = year, cumulative = TRUE)  #Add data and keep the old data in gganimate only
+  )+
+   transition_manual(frames = year, cumulative = TRUE)  #Add data and keep the old data in gganimate only
    
 ggsave("figures/climate_spiral_nasa.png", width = 4.155, height = 4.5, unit = "in", dpi = 300)
  
-# animate(a, width = 4.155, height = 4.5, unit = "in", res = 300
-#         # nframes = nrow(t_data),
-#         # fps = nrow(t_data)/12/60/60
-#         )
-# anim_save("figures/climate_spiral.gif")
-# 
+animate(a, width = 4.155, height = 4.5, unit = "in", res = 300)
+anim_save("figures/climate_spiral_nasa.gif")
+
 # animate(a, width = 4.155, height = 4.5, unit = "in", res = 300,
 #         renderer = av_renderer("figures/climate_spiral.mp4")
 # )
