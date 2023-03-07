@@ -96,7 +96,7 @@ gridlines <-
                      ) + #Rescale y axis
   scale_color_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, #Change the color to continuous scale. Re-scale the legend
                         guide = "none") + #Remove legend 
-  coord_polar(start = 0)+ #Set polar 5 minutes off. "start" measures thing in radius 
+  # coord_polar(start = 0)+ #Set polar 5 minutes off. "start" measures thing in radius 
   labs(x = NULL, # Add label
       y = NULL,
       title = NULL) + 
