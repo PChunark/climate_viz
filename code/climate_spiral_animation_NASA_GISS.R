@@ -49,7 +49,7 @@ temp_line <- #Create text at specific position
   tibble(
     x = 1,
     y = c(1, 0, -1),
-    labels = c("+1\u00B0C","0\u00B0C", "-1.0\u00B0C")
+    labels = c("+1\u00B0 C","0\u00B0 C", "-1.0\u00B0 C")
   )
 
 #Create dataframe for tangential month to the ciricle
@@ -63,8 +63,8 @@ month_label <-
 #Make dataframe for grid line and used in geom_segment
 gridlines <- 
   tibble(
-    x = 1.5,
-    xend = 12.5,
+    x = c(1.2, 1.3, 1.6),
+    xend = c(12.8, 12.7, 12.4),
     y = c(1, 0, -1),
     yend = y
   )
@@ -89,7 +89,7 @@ gridlines <-
                color = c("yellow", "green", "yellow"),
                inherit.aes = FALSE) + 
   geom_text(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
-               color = c("yellow", "green", "yellow"),
+               color = c("yellow", "green", "yellow"), size = 2, fontface = "bold",
                inherit.aes = FALSE)+
   geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
               color = "yellow",
