@@ -86,10 +86,10 @@ gridlines <-
   geom_segment(data = gridlines, # Add yellow line at -1,0,1 y intercept, use geom segment and make new dataframe
                aes(x = x, y = y,
                    xend = xend, yend = yend), 
-               color = "yellow",
+               color = c("yellow", "green", "yellow"),
                inherit.aes = FALSE) + 
   geom_text(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
-               color = "yellow",
+               color = c("yellow", "green", "yellow"),
                inherit.aes = FALSE)+
   geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
               color = "yellow",
