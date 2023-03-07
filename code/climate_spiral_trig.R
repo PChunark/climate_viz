@@ -32,13 +32,15 @@ t_diff <-
 
 #Combine 3 dataframes
 t_data <- 
-  bind_rows(t_diff,next_jan) %>%
+  t_diff %>%
   mutate(month = factor(month, levels = c(month.abb, "next_Jan")), #Order months into numerical order rather than alphabet order, define month as a factor
          month_number = as.numeric(month)) %>% #Remove previous December to remove zero from dataframe
   arrange(year, month) %>% # arrange year and month       
-  filter(year != 1879) %>% # we dont need 1879
-  mutate(step_number = 1:nrow(.)) #Add row number. 1:nrow(.) means count from 1 to the end of row in this dataframe. need to count step over the row
-  
+  mutate(step_number = 1:nrow(.), #Add row number. 1:nrow(.) means count from 1 to the end of row in this dataframe. need to count step over the row
+         radius = t_diff,
+         theta = (month_number-1) / 12) # Theta starts from zero degree January will be zero and divided by 12 to give angle to months
+         
+         
   
   annotation <-
     t_data %>% #create new dataframe from 2022
