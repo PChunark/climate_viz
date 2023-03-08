@@ -30,14 +30,16 @@ t_diff <-
 #   mutate(year = year - 1,    # Add extra year
 #          month = "next_Jan") # Rename it
 
-#Combine 3 dataframes
+# Create dummy variable for radius
+radius_bumb <- 1.5
+
 t_data <- 
   t_diff %>%
   mutate(month = factor(month, levels = c(month.abb, "next_Jan")), #Order months into numerical order rather than alphabet order, define month as a factor
          month_number = as.numeric(month)) %>% #Remove previous December to remove zero from dataframe
   arrange(year, month) %>%  # arrange year and month       
   mutate(step_number = 1:nrow(.), #Add row number. 1:nrow(.) means count from 1 to the end of row in this dataframe. need to count step over the row
-         radius = t_diff + 1.5,         theta = 2 * pi * (month_number-1) / 12, # Convert an angle to radian. Theta starts from zero degree January will be zero and divided by 12 to give angle to months. 
+         radius = t_diff + radius_bumb,         theta = 2 * pi * (month_number-1) / 12, # Convert an angle to radian. Theta starts from zero degree January will be zero and divided by 12 to give angle to months. 
          x = radius * sin(theta),
          y = radius * cos(theta))
   
@@ -73,7 +75,7 @@ month_label <-
 # Adding gridlines to climate spiral 
 gridlines <-
   tibble(theta = 2 * pi * rep(seq(0, 1, 0.01), each = 3), #Repeat theta
-       radius = rep(c(1, 0, -1), length.out = length(theta)),
+       radius = rep(c(1, 0, -1) + radius_bumb, length.out = length(theta)),
        line = rep(c("a", "b", "c"), length.out = length(theta)),
        x = radius * cos(theta),
        y = radius * sin(theta))
