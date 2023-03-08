@@ -58,10 +58,12 @@ temp_line <- #Create text at specific position
 #Create dataframe for tangential month to the ciricle
 month_label <-
   tibble(
-    x = 1:12,
+    theta = 2 * pi * (1:12 - 1)/12,
+    radius = 1.5 + radius_bumb,
     labels = toupper(month.abb), #Convert month label to capital letters
-    y = 1.5
-  )
+    x = radius * sin(theta),
+    y = radius * cos(theta)
+    )
 
 #Make dataframe for grid line and used in geom_segment
 # gridlines <- 
