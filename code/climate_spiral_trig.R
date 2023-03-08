@@ -39,7 +39,8 @@ t_data <-
          month_number = as.numeric(month)) %>% #Remove previous December to remove zero from dataframe
   arrange(year, month) %>%  # arrange year and month       
   mutate(step_number = 1:nrow(.), #Add row number. 1:nrow(.) means count from 1 to the end of row in this dataframe. need to count step over the row
-         radius = t_diff + radius_bumb,         theta = 2 * pi * (month_number-1) / 12, # Convert an angle to radian. Theta starts from zero degree January will be zero and divided by 12 to give angle to months. 
+         radius = t_diff + radius_bumb,         
+         theta = 2 * pi * (month_number-1) / 12, # Convert an angle to radian. Theta starts from zero degree January will be zero and divided by 12 to give angle to months. 
          x = radius * sin(theta),
          y = radius * cos(theta))
   
@@ -55,7 +56,7 @@ temp_line <- #Create text at specific position
     labels = c("+1\u00B0 C","0\u00B0 C", "-1.0\u00B0 C")
   )
 
-#Create dataframe for tangential month to the ciricle
+#Create data frame for tangential month to the circle
 month_label <-
   tibble(
     theta = 2 * pi * (1:12 - 1)/12,
@@ -65,7 +66,7 @@ month_label <-
     y = radius * cos(theta)
     )
 
-#Make dataframe for grid line and used in geom_segment
+#Make data frame for grid line and used in geom_segment
 # gridlines <- 
 #   tibble(
 #     x = c(1.2, 1.3, 1.6),
@@ -74,13 +75,16 @@ month_label <-
 #     yend = y
 #   )
  
-# Adding gridlines to climate spiral 
+# Adding grid lines to climate spiral 
 gridlines <-
   tibble(theta = 2 * pi * rep(seq(0, 1, 0.01), each = 3), #Repeat theta
        radius = rep(c(1, 0, -1) + radius_bumb, length.out = length(theta)),
        line = rep(c("a", "b", "c"), length.out = length(theta)),
-       x = radius * cos(theta),
-       y = radius * sin(theta))
+       x = radius * sin(theta),
+       y = radius * cos(theta)) %>% 
+       filter((line == "a" & theta > 0.01 * 2 * pi & theta < 0.99 * 2 * pi) |
+                (line == "b" & theta > 0.025 * 2 * pi & theta < 0.975 * 2 * pi) |
+                (line == "c" & theta > 0.09 * 2 * pi & theta < 0.91 * 2 * pi))
  
 
 #a <-  
@@ -95,15 +99,15 @@ gridlines <-
   geom_path(data = gridlines %>% filter(radius != radius_bumb), # radius should not be equal to dummy radius bumb 
                aes(x = x, y = y,
                    group = line), 
-               color = "yellow",
+               color = "yellow", size = 1,
                inherit.aes = FALSE) +
   geom_path(data = gridlines %>% filter(radius == radius_bumb), # radius should not be equal to dummy radius bumb 
               aes(x = x, y = y,
                   group = line), 
-              color = "green",
+              color = "green", size = 1,
               inherit.aes = FALSE) +   
   geom_text(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
-               color = c("yellow", "green", "yellow"), size = 2, fontface = "bold",
+               color = c("yellow", "green", "yellow"), size = 3, fontface = "bold",
                inherit.aes = FALSE)+
   geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
               color = "yellow",
@@ -133,7 +137,7 @@ gridlines <-
   )#+
    #transition_manual(frames = year, cumulative = TRUE)  #Add data and keep the old data in gganimate only
    
-ggsave("figures/climate_spiral_trig.png", width = 4.155, height = 4.5, unit = "in", dpi = 300)
+ggsave("figures/climate_spiral_trig.png", width = 4.5, height = 4.5, unit = "in", dpi = 300)
  
 # animate(a, width = 4.155, height = 4.5, unit = "in", res = 300)
 # anim_save("figures/climate_spiral_trig.gif")
