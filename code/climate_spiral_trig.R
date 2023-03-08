@@ -88,10 +88,10 @@ gridlines <-
                label.size = 0,
                size = 6) +
   geom_path()+  
-  geom_segment(data = gridlines, # Add yellow line at -1,0,1 y intercept, use geom segment and make new dataframe
+  geom_path(data = gridlines %>% filter(radius != radius_bumb), # radius should not be equal to dummy radius bumb 
                aes(x = x, y = y,
-                   xend = xend, yend = yend), 
-               color = c("yellow", "green", "yellow"),
+                   group = line), 
+               color = "yellow",
                inherit.aes = FALSE) + 
   geom_text(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
                color = c("yellow", "green", "yellow"), size = 2, fontface = "bold",
