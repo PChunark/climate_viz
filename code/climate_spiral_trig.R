@@ -62,18 +62,21 @@ month_label <-
   )
 
 #Make dataframe for grid line and used in geom_segment
-gridlines <- 
-  tibble(
-    x = c(1.2, 1.3, 1.6),
-    xend = c(12.8, 12.7, 12.4),
-    y = c(1, 0, -1),
-    yend = y
-  )
+# gridlines <- 
+#   tibble(
+#     x = c(1.2, 1.3, 1.6),
+#     xend = c(12.8, 12.7, 12.4),
+#     y = c(1, 0, -1),
+#     yend = y
+#   )
  
 # Adding gridlines to climate spiral 
-tibble(theta = seq(0, 1, 0.01),
-       radius = 1,
-       line = "one_degree")
+gridlines <-
+  tibble(theta = 2 * pi * rep(seq(0, 1, 0.01), each = 3), #Repeat theta
+       radius = rep(c(1, 0, -1), length.out = length(theta)),
+       line = rep(c("a", "b", "c"), length.out = length(theta)),
+       x = radius * cos(theta),
+       y = radius * sin(theta))
  #a <-  
   t_data %>% ggplot(aes(x = x, 
              y = y, 
