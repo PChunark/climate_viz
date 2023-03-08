@@ -87,7 +87,7 @@ gridlines <-
                 (line == "c" & theta > 0.09 * 2 * pi & theta < 0.91 * 2 * pi))
  
 
-#a <-  
+a <-  
   t_data %>% ggplot(aes(x = x, 
              y = y, 
              color = t_diff)) + #Let's coloring by temperature change. Previous version was colored by year
@@ -121,7 +121,6 @@ gridlines <-
   coord_fixed()+ # Make a proportion of an x and y fixed  
   scale_color_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, #Change the color to continuous scale. Re-scale the legend
                         guide = "none") + #Remove legend 
-  # coord_polar(start = 0)+ #Set polar 5 minutes off. "start" measures thing in radius 
   labs(x = NULL, # Add label
       y = NULL,
       title = NULL) + 
@@ -134,13 +133,13 @@ gridlines <-
     axis.ticks = element_blank(),
     axis.title = element_blank(),
     plot.title = element_blank()
-  )#+
-   #transition_manual(frames = year, cumulative = TRUE)  #Add data and keep the old data in gganimate only
+  )+
+   transition_reveal(step_number)  #Add data and keep the old data in gganimate only
    
 ggsave("figures/climate_spiral_trig.png", width = 4.5, height = 4.5, unit = "in", dpi = 300)
  
-# animate(a, width = 4.155, height = 4.5, unit = "in", res = 300)
-# anim_save("figures/climate_spiral_trig.gif")
+animate(a, width = 4.5, height = 4.5, unit = "in", res = 300)
+anim_save("figures/climate_spiral_trig.gif")
 
 # animate(a, width = 4.155, height = 4.5, unit = "in", res = 300,
 #         renderer = av_renderer("figures/climate_trig.mp4")
