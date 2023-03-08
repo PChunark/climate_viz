@@ -44,7 +44,7 @@ t_data <-
          x = radius * sin(theta),
          y = radius * cos(theta))
   
-  annotation <-
+annotation <-
     t_data %>% #create new dataframe from 2022
     slice_max(year) %>%
     slice_max(month_number)
@@ -77,7 +77,7 @@ month_label <-
  
 # Adding grid lines to climate spiral 
 gridlines <-
-  tibble(theta = 2 * pi * rep(seq(0, 1, 0.01), each = 3), #Repeat theta
+  tibble(theta = rep(2 * pi * seq(0, 1, 0.01), each = 3), #Repeat theta
        radius = rep(c(1, 0, -1) + radius_bumb, length.out = length(theta)),
        line = rep(c("a", "b", "c"), length.out = length(theta)),
        x = radius * sin(theta),
@@ -95,7 +95,7 @@ a <-
                fill = "black",
                label.size = 0,
                size = 6) +
-  geom_path()+  
+  geom_path()+
   geom_path(data = gridlines %>% filter(radius != radius_bumb), # radius should not be equal to dummy radius bumb 
                aes(x = x, y = y,
                    group = line), 
@@ -134,7 +134,7 @@ a <-
     axis.title = element_blank(),
     plot.title = element_blank()
   )+
-   transition_reveal(step_number)  #Add data and keep the old data in gganimate only
+   transition_reveal(along = step_number)  #Add data and keep the old data in gganimate only
    
 ggsave("figures/climate_spiral_trig.png", width = 4.5, height = 4.5, unit = "in", dpi = 300)
  
