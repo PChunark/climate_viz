@@ -70,6 +70,10 @@ gridlines <-
     yend = y
   )
  
+# Adding gridlines to climate spiral 
+tibble(theta = seq(0, 1, 0.01),
+       radius = 1,
+       line = "one_degree")
  #a <-  
   t_data %>% ggplot(aes(x = x, 
              y = y, 
