@@ -108,9 +108,13 @@ gridlines <-
   geom_text(data = month_label, aes(x = x, y = y, label = labels), # Add month label back to the position
               color = "yellow",
               inherit.aes = FALSE) +
-  scale_y_continuous(limits = c(-2.0, 1.5),
+  scale_y_continuous(limits = c(-4, 4),
                      expand = c(0,-0.3) # expand grid. First is an addition. Second is an multiplication.
                      ) + #Rescale y axis
+  scale_x_continuous(limits = c(-4, 4),
+                     expand = c(0,-0.3) # expand grid. First is an addition. Second is an multiplication.
+    ) + #Rescale x axis
+  coord_fixed()+ # Make a proportion of an x and y fixed  
   scale_color_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, #Change the color to continuous scale. Re-scale the legend
                         guide = "none") + #Remove legend 
   # coord_polar(start = 0)+ #Set polar 5 minutes off. "start" measures thing in radius 
