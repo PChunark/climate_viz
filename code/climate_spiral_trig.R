@@ -50,8 +50,8 @@ t_data <-
  
 temp_line <- #Create text at specific position
   tibble(
-    x = 1,
-    y = c(1, 0, -1),
+    x = 0,
+    y = c(1, 0, -1) + radius_bumb,
     labels = c("+1\u00B0 C","0\u00B0 C", "-1.0\u00B0 C")
   )
 
@@ -79,7 +79,9 @@ gridlines <-
        line = rep(c("a", "b", "c"), length.out = length(theta)),
        x = radius * cos(theta),
        y = radius * sin(theta))
- #a <-  
+ 
+
+#a <-  
   t_data %>% ggplot(aes(x = x, 
              y = y, 
              color = t_diff)) + #Let's coloring by temperature change. Previous version was colored by year
@@ -92,7 +94,12 @@ gridlines <-
                aes(x = x, y = y,
                    group = line), 
                color = "yellow",
-               inherit.aes = FALSE) + 
+               inherit.aes = FALSE) +
+  geom_path(data = gridlines %>% filter(radius == radius_bumb), # radius should not be equal to dummy radius bumb 
+              aes(x = x, y = y,
+                  group = line), 
+              color = "green",
+              inherit.aes = FALSE) +   
   geom_text(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
                color = c("yellow", "green", "yellow"), size = 2, fontface = "bold",
                inherit.aes = FALSE)+
