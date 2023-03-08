@@ -37,10 +37,10 @@ t_data <-
          month_number = as.numeric(month)) %>% #Remove previous December to remove zero from dataframe
   arrange(year, month) %>%  # arrange year and month       
   mutate(step_number = 1:nrow(.), #Add row number. 1:nrow(.) means count from 1 to the end of row in this dataframe. need to count step over the row
-         radius = t_diff,
-         theta = 2 * pi * (month_number-1) / 12, # Convert an angle to radian. Theta starts from zero degree January will be zero and divided by 12 to give angle to months. 
-         x = radius * cos(theta),
-         y = radius * sin(theta))
+         radius = t_diff + 1.5,         theta = 2 * pi * (month_number-1) / 12, # Convert an angle to radian. Theta starts from zero degree January will be zero and divided by 12 to give angle to months. 
+         x = radius * sin(theta),
+         y = radius * cos(theta)) %>% 
+  slice_head(n=24)
   
   annotation <-
     t_data %>% #create new dataframe from 2022
@@ -72,16 +72,15 @@ gridlines <-
   )
  
  #a <-  
-  t_data %>% ggplot(aes(x = month_number, 
-             y = t_diff, 
-             group = year, 
-             color = t_diff), #Let's coloring by temperature change. Previous version was colored by year
-             inherit.aes = FALSE) +
-    geom_label(aes(x = 1, y = -1.7, label = year),  #geom_label it provides a text with background
-               fill = "black",
-               label.size = 0,
-               size = 6) +
-  geom_line()+
+  t_data %>% ggplot(aes(x = x, 
+             y = y, 
+             color = t_diff) #Let's coloring by temperature change. Previous version was colored by year
+) +
+    # geom_label(aes(x = 1, y = -1.7, label = year),  #geom_label it provides a text with background
+    #            fill = "black",
+    #            label.size = 0,
+    #            size = 6) +
+  geom_path()+  
   geom_segment(data = gridlines, # Add yellow line at -1,0,1 y intercept, use geom segment and make new dataframe
                aes(x = x, y = y,
                    xend = xend, yend = yend), 
