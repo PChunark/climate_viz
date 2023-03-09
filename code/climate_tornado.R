@@ -17,6 +17,18 @@ t_data %>%
                         mid = "white" , 
                         high = "darkred",
                         midpoint = 0,
-                        guide = "none") 
-  
+                        guide = "none") +
+  scale_y_continuous(limits = c(NA, 2030), expand = c(0,0)) + # limiting the vertical lines at bottom data level
+  labs(x = NULL,
+       y = NULL,
+       title = NULL) + 
+  theme(
+    plot.background = element_rect(fill = "black"),
+    panel.background = element_rect(fill = "black", color = "black"),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank()
+  )
+
+ggsave("figures/climate_tornado.png", width = 4.5, height = 3.5, units = "in")  
   
