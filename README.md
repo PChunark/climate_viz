@@ -14,6 +14,9 @@ https://www.youtube.com/watch?v=NYF9ySYSvwQ
 https://www.youtube.com/watch?v=kXbpAhWF6iw&t=180s
 8. Making a 3D interactive figure showing climate change with plotly. Follow the link CC223 episode -->
 https://www.youtube.com/watch?v=PytBiFU0rEc
+9. Illustrating climate change using the ggplot2 to create a tornado plot. Follow the link  CC224 -->
+https://www.youtube.com/watch?v=Yebe0IcBFh0
+
 
 
 Enjoy learning R language!!
