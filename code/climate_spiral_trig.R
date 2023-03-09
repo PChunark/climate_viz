@@ -99,12 +99,12 @@ a <-
   geom_path(data = gridlines %>% filter(radius != radius_bumb), # radius should not be equal to dummy radius bumb 
                aes(x = x, y = y,
                    group = line), 
-               color = "yellow", size = 1,
+               color = "yellow", #size = 1,
                inherit.aes = FALSE) +
   geom_path(data = gridlines %>% filter(radius == radius_bumb), # radius should not be equal to dummy radius bumb 
               aes(x = x, y = y,
                   group = line), 
-              color = "green", size = 1,
+              color = "green", #size = 1,
               inherit.aes = FALSE) +   
   geom_text(data = temp_line, aes(x = x, y = y, label = labels), #Add label and coloring
                color = c("yellow", "green", "yellow"), size = 3, fontface = "bold",
