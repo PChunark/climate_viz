@@ -12,5 +12,8 @@ https://www.youtube.com/watch?v=NYF9ySYSvwQ
 6. Creating the NASA GISS animated climate spiral in R. Follow the link CC220 episode --> https://www.youtube.com/watch?v=YkJFaQVrD9Y
 7. Creating a spiral in cartesian coordinates with ggplot2 in R. Follow the link CC222 episode -->
 https://www.youtube.com/watch?v=kXbpAhWF6iw&t=180s
+8. Making a 3D interactive figure showing climate change with plotly. Follow the link CC223 episode -->
+https://www.youtube.com/watch?v=PytBiFU0rEc
+
 
 Enjoy learning R language!!
