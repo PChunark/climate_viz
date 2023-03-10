@@ -12,10 +12,23 @@ t_data <- read_csv(file = "data/GLB.Ts+dSST.csv", skip = 1, na = "***") %>%
   drop_na() %>%  
   inner_join(., month_anom, by = "month") %>%  #Join 2 dataframes by months
   mutate(month = factor(month, levels = month.abb),
-         month_anom = t_diff + seas_anom) #Calculate month anom to generate a line plot
-
+         month_anom = t_diff + seas_anom - 0.7) %>%  #Calculate month anom to generate a line plot
+  group_by(year) %>% 
+  mutate(ave = mean(month_anom)) %>% #get a temperature to map a color to, an average temperature is calculated
+  ungroup() %>% 
+  mutate(ave = if_else(year == 2022, max(abs(ave)),ave))
+  
+  
+  
+  
 t_data %>% 
   ggplot(aes(x = month,
              y = month_anom,
-             group = year)) + 
-  geom_line()
+             group = year,
+             color = ave)) + 
+  geom_line() + 
+  scale_color_gradient2(low = "darkblue",
+                        mid = "white",
+                        high = "darkred",
+                        midpoint = 0,
+                        guide = "none")
