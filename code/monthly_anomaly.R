@@ -72,4 +72,4 @@ a <- p +
   transition_manual(year, cumulative = TRUE)
 
 animate(a, width = 6, height = 4, unit = "in", res = 300)
-ani_save("figures/monthly_anomaly.gif")
+anim_save("figures/monthly_anomaly.gif")
