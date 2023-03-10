@@ -18,7 +18,9 @@ t_data <- read_csv(file = "data/GLB.Ts+dSST.csv", skip = 1, na = "***") %>%
   ungroup() %>% 
   mutate(ave = if_else(year == 2022, max(abs(ave)),ave))
   
-  
+annotation <-
+  t_data %>% 
+  slice_tail(n = 1)
   
   
 t_data %>% 
@@ -27,13 +29,19 @@ t_data %>%
              group = year,
              color = ave)) + 
   geom_line() + 
+  geom_point(data = annotation, 
+             aes(x = month, y = month_anom)) +#Adding in last point data to a plot. We need additional dataframe
+  geom_text(data = annotation, 
+            aes(x = 11.7, y = month_anom), 
+            label = "December 2022",
+            hjust = 1)+
   scale_color_gradient2(low = "darkblue",
                         mid = "white",
                         high = "darkred",
                         midpoint = 0,
                         guide = "none") +
   scale_y_continuous(breaks = seq(-3,2,1)) +
-  scale_x_discrete(expand = c(0,0))+ # Remove space between a line plot and axises
+  scale_x_discrete(expand = c(0,0.1))+ # Remove space between a line plot and axises
   labs(
     x = NULL,
     y = NULL,
