@@ -8,6 +8,11 @@ grid_labels <- tibble(
   labels = c("+1 \u00B0C", "0 \u00B0C", "0 \u00B0C", "+1 \u00B0C")
   )
 
+#Make year labels
+year_labels <- tibble(
+  x = -2,
+  y = c(seq(1880, 2000, by = 20), 2021)
+  )
 
 t_data <- read.csv("data/GLB.Ts+dSST.csv", skip = 1, na = "***") %>% 
   select(year = Year, all_of(month.abb)) %>% 
@@ -30,6 +35,14 @@ t_data %>%
              label.size = 0, #border edge size
              size = 3)+ #give font size
   geom_segment(size = 0.9, lineend = "round") + # Increase the thickness of the line. Round the end of the line
+  geom_text(data = year_labels, 
+            aes(x = x, 
+                y = y,
+                label = y),
+            inherit.aes = FALSE,
+            color = "gold",
+            size = 3,
+            fontface = "bold") +
   scale_color_gradient2(low = "darkblue" , 
                         mid = "white" , 
                         high = "darkred",
