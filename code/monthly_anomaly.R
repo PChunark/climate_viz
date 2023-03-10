@@ -31,4 +31,27 @@ t_data %>%
                         mid = "white",
                         high = "darkred",
                         midpoint = 0,
-                        guide = "none")
+                        guide = "none") +
+  scale_y_continuous(breaks = seq(-3,2,1)) +
+  scale_x_discrete(expand = c(0,0))+ # Remove space between a line plot and axises
+  labs(
+    x = NULL,
+    y = NULL,
+    title = "Temperature Anomaly (\u00B0 C)",
+    subtitle = "(Difference from 1980-2015 annual mean)"
+  )+
+  theme(
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(color = "gray",
+                                      linetype = "dotted",
+                                      size = 0.25),
+    plot.title.position = "plot",
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(color = "gray", 
+                                 size = 10),
+    plot.margin = margin(t = 10, r = 15, b = 10, l = 10) #Give a margin to a plot
+  )
+
+ggsave("figures/monthly_anomaly.png", width = 6, height = 4, units = "in")
