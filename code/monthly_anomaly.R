@@ -1,4 +1,5 @@
 library(tidyverse)
+library(gganimate)
 
 month_anom <- 
   read_table(file = "data/merra2_seas_anom.txt", skip = 3) %>% 
@@ -23,18 +24,12 @@ annotation <-
   slice_tail(n = 1)
   
   
-t_data %>% 
+p <- t_data %>% 
   ggplot(aes(x = month,
              y = month_anom,
              group = year,
              color = ave)) + 
   geom_line() + 
-  geom_point(data = annotation, 
-             aes(x = month, y = month_anom)) +#Adding in last point data to a plot. We need additional dataframe
-  geom_text(data = annotation, 
-            aes(x = 11.7, y = month_anom), 
-            label = "December 2022",
-            hjust = 1)+
   scale_color_gradient2(low = "darkblue",
                         mid = "white",
                         high = "darkred",
@@ -62,4 +57,19 @@ t_data %>%
     plot.margin = margin(t = 10, r = 15, b = 10, l = 10) #Give a margin to a plot
   )
 
+p + geom_point(data = annotation, 
+               aes(x = month, y = month_anom)) +#Adding in last point data to a plot. We need additional dataframe
+  geom_text(data = annotation, 
+            aes(x = 11.7, y = month_anom), 
+            label = "December 2022",
+            hjust = 1)
+
+
 ggsave("figures/monthly_anomaly.png", width = 6, height = 4, units = "in")
+
+a <- p +
+  geom_label(aes(x = 7, y = 0, label = year), fontface = "bold", label.size = 0) +
+  transition_manual(year, cumulative = TRUE)
+
+animate(a, width = 6, height = 4, unit = "in", res = 300)
+ani_save("figures/monthly_anomaly.gif")
