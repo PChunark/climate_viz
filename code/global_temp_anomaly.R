@@ -43,4 +43,7 @@ as.data.table(t_anomaly.array) %>%  # it automatically removes the NA value
          year = year(time)) %>%
            # tail() #See recent time point
          group_by(year, longtitude, latitude) %>% #Calculate average t_diff
-  summarize(t_diff = mean(t_diff), .groups = "drop") #Calculate average t_diff and drop a group we built above
+  summarize(t_diff = mean(t_diff), .groups = "drop") %>%  #Calculate average t_diff and drop a group we built above
+  count(year) %>% #Count how many gridpoint we have in each year
+  ggplot(aes(x = year, y = n)) + 
+  geom_line() #See sampling we have by a year
