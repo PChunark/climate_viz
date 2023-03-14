@@ -1,6 +1,7 @@
 library(tidyverse)
 library(R.utils) #For unzip the file
 library(ncdf4) ## package for netcdf manipulation
+library(data.table)
 
 #Download a file from the NASA website
 url <- "https://data.giss.nasa.gov/pub/gistemp/gistemp250_GHCNv4.nc.gz"
@@ -30,3 +31,11 @@ fillvalue <- ncatt_get(nc_data, "tempanomaly", "_FillValue")
 
 #Working on data, fill NA value
 t_anomaly.array[t_anomaly.array == fillvalue$value] <- NA
+
+#Now we have 3 dimensional array. We need to get it in tidy format. Use "data.table" package
+as.data.table(t_anomaly.array) %>%  # it automatically removes the NA value
+  as.tibble() %>% 
+  select(longtitude = V1, latitude = V2, time = V3, t_diff = value) %>% 
+  mutate(longtitude = lon[longtitude], #Take lon vector that we defined up above and take the value from the longtitude column and plug them to a lon[] vector and return a value from the lon vector
+         latitude = lat[latitude],
+         time = t[time])
