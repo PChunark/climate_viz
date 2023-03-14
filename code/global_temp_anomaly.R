@@ -2,6 +2,7 @@ library(tidyverse)
 library(R.utils) #For unzip the file
 library(ncdf4) ## package for netcdf manipulation
 library(data.table)
+library(lubridate)
 
 #Download a file from the NASA website
 url <- "https://data.giss.nasa.gov/pub/gistemp/gistemp250_GHCNv4.nc.gz"
@@ -38,5 +39,8 @@ as.data.table(t_anomaly.array) %>%  # it automatically removes the NA value
   select(longtitude = V1, latitude = V2, time = V3, t_diff = value) %>% 
   mutate(longtitude = lon[longtitude], #Take lon vector that we defined up above and take the value from the longtitude column and plug them to a lon[] vector and return a value from the lon vector
          latitude = lat[latitude],
-         time = t[time] + as.Date("1800-01-01")) %>%  # Convert time from 57388 to date. 57388 is the number of day since 1st January 1800 (the dataset told us).
-  tail() #See recent time point
+         time = t[time] + as.Date("1800-01-01"),   # Convert time from 57388 to date. 57388 is the number of day since 1st January 1800 (the dataset told us).
+         year = year(time)) %>%
+           # tail() #See recent time point
+         group_by(year, longtitude, latitude) %>% #Calculate average t_diff
+  summarize(t_diff = mean(t_diff), .groups = "drop") #Calculate average t_diff and drop a group we built above
