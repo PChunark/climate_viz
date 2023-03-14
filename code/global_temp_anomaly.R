@@ -22,9 +22,11 @@ lat <- ncvar_get(nc_data, "lat", verbose = F)
 t <- ncvar_get(nc_data, "time")
 
 # Read in the data from the tempanomaly variable and verify the dimensions of the array
-ndvi.array <- ncvar_get(nc_data, "tempanomaly") # store the data in a 3-dimensional array
-dim(ndvi.array) 
+t_anomaly.array <- ncvar_get(nc_data, "tempanomaly") # store the data in a 3-dimensional array
+dim(t_anomaly.array) 
 
 #Fill in missing data
 fillvalue <- ncatt_get(nc_data, "tempanomaly", "_FillValue")
-fillvalue
+
+#Working on data, fill NA value
+t_anomaly.array[t_anomaly.array == fillvalue$value] <- NA
