@@ -71,4 +71,4 @@ t_data %>%
                        midpoint = 0) +
   coord_cartesian(xlim = c(-5,5)) + # Set the x scale
   scale_x_continuous(breaks = seq(-4,4,2)) + 
-  scale_y_discrete(seq())
+  scale_y_discrete(breaks = seq(1950, 2020, 10))
