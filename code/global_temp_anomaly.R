@@ -91,3 +91,8 @@ t_data %>%
   )
 
 ggsave("figures/temp_distribution.png", height = 6, width = 4)
+
+nc_close(nc_data) #close the connection between data
+unlink("gistemp250_GHCNv4.nc") #unlink file that we tell gitignore to ingore. The file will no longer in the directory
+unlink("gistemp250_GHCNv4.txt")
+unlink("gistemp250_GHCNv4.nc.gz")
