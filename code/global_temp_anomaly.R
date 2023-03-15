@@ -34,7 +34,7 @@ fillvalue <- ncatt_get(nc_data, "tempanomaly", "_FillValue")
 t_anomaly.array[t_anomaly.array == fillvalue$value] <- NA
 
 #Now we have 3 dimensional array. We need to get it in tidy format. Use "data.table" package
-as.data.table(t_anomaly.array) %>%  # it automatically removes the NA value
+t_data <- as.data.table(t_anomaly.array) %>%  # it automatically removes the NA value
   as.tibble() %>% 
   select(longtitude = V1, latitude = V2, time = V3, t_diff = value) %>% 
   mutate(longtitude = lon[longtitude], #Take lon vector that we defined up above and take the value from the longtitude column and plug them to a lon[] vector and return a value from the lon vector
@@ -44,6 +44,9 @@ as.data.table(t_anomaly.array) %>%  # it automatically removes the NA value
            # tail() #See recent time point
          group_by(year, longtitude, latitude) %>% #Calculate average t_diff
   summarize(t_diff = mean(t_diff), .groups = "drop") %>%  #Calculate average t_diff and drop a group we built above
-  count(year) %>% #Count how many gridpoint we have in each year
-  ggplot(aes(x = year, y = n)) + 
-  geom_line() #See sampling we have by a year
+#This part checks the sampling number
+  # count(year) %>% #Count how many gridpoint we have in each year
+  # ggplot(aes(x = year, y = n)) + 
+  # geom_line() #See sampling we have by a year
+######
+  filter(year >= 1950) #The sampling number steeply increases since 1950
