@@ -63,4 +63,11 @@ t_data %>%
                        mid = "white",
                        high = "darkred",
                        midpoint = 0) +
-  coord_fixed() #Ensure the scale that are 1 degree of longtitude = 1 degree of latitude
+  coord_fixed(expand = FALSE) + #Ensure the scale that are 1 degree of longtitude = 1 degree of latitude. "Expand = FALSE" is a argument to remove a margin in a plot
+  labs(x = NULL,
+       y = NULL) +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.background = element_rect(fill = "black"),
+        plot.background = element_rect(fill = "black"),
+        panel.grid = element_blank())
