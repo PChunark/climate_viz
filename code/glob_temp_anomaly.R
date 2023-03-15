@@ -51,8 +51,10 @@ t_data <- as.data.table(t_anomaly.array) %>%  # it automatically removes the NA 
   # ggplot(aes(x = year, y = n)) + 
   # geom_line() #See sampling we have by a year
 ######
-  filter(year >= 1950 & year < 2022) 
-
+  filter(year >= 1950 & year < 2022) %>% 
+  mutate(decade = 10 * floor(year / 10),  #Add decade labels to a plot by using "floor" argument. "Floor" argument neglects all decimal point.
+         single = year %% 10) #mutate a remainder of the division
+  
 t_data %>% 
   # filter(year == 2000) %>% 
   ggplot(aes(x = longtitude,
@@ -63,7 +65,7 @@ t_data %>%
                        mid = "white",
                        high = "darkred",
                        midpoint = 0) +
-  facet_wrap(~year, ncol = 10, nrow = 8) +
+  facet_grid(decade~single) +
   coord_fixed(expand = FALSE) + #Ensure the scale that are 1 degree of longtitude = 1 degree of latitude. "Expand = FALSE" is a argument to remove a margin in a plot
   labs(x = NULL,
        y = NULL) +
