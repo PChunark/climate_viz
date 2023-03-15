@@ -5,6 +5,7 @@ library(data.table)
 library(lubridate) #package for data and time
 library(ggridges) # Package for creating a ridgeline plot
 
+# The original plot is from NASA website: https://svs.gsfc.nasa.gov/4891
 #Download a file from the NASA website
 url <- "https://data.giss.nasa.gov/pub/gistemp/gistemp250_GHCNv4.nc.gz"
 download.file(url, destfile = "gistemp250_GHCNv4.nc.gz") #It is a gZip file
