@@ -65,7 +65,8 @@ t_data %>%
                        mid = "white",
                        high = "darkred",
                        midpoint = 0) +
-  facet_grid(decade~single) +
+  facet_grid(decade~single,
+             switch = "y") + #Switch year label from the right to the left side of the plot
   coord_fixed(expand = FALSE) + #Ensure the scale that are 1 degree of longtitude = 1 degree of latitude. "Expand = FALSE" is a argument to remove a margin in a plot
   labs(x = NULL,
        y = NULL) +
@@ -73,4 +74,8 @@ t_data %>%
         axis.ticks = element_blank(),
         panel.background = element_rect(fill = "black"),
         plot.background = element_rect(fill = "black"),
-        panel.grid = element_blank())
+        panel.grid = element_blank(),
+        strip.text.x = element_blank(), #Facet grid --> remove above label on facet grid
+        strip.text.y.left = element_text(angle = 0, #Facet grid --> rotate strip text
+                                         color = "white"),
+        strip.background = element_blank()) #Facet grid --> Remove strip background
