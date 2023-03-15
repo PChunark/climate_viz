@@ -64,10 +64,13 @@ t_data %>%
              y = latitude,
              fill = t_diff)) + # geom_raster take a color from "fill" argument not a "color" argument
   geom_raster() +
-  scale_fill_gradient2(low = "darkblue",
+  scale_fill_gradient2(name = "Temperature anomaly \u00B0C", #give name to the legend
+                       low = "darkblue",
                        mid = "white",
                        high = "darkred",
-                       midpoint = 0) +
+                       midpoint = 0,
+                       limits = c(-5, 5), #give limit to gradient color legend
+                       breaks = c(-4, -2, 0, 2, 4)) + # Assign the break of the legend
   facet_grid(decade~single,
              switch = "y") + #Switch year label from the right to the left side of the plot
   coord_fixed(expand = FALSE) + #Ensure the scale that are 1 degree of longtitude = 1 degree of latitude. "Expand = FALSE" is a argument to remove a margin in a plot
@@ -81,6 +84,14 @@ t_data %>%
         strip.text.x = element_blank(), #Facet grid --> remove above label on facet grid
         strip.text.y.left = element_text(angle = 0, #Facet grid --> rotate strip text
                                          color = "white"),
-        strip.background = element_blank()) #Facet grid --> Remove strip background
-
+        strip.background = element_blank(), #Facet grid --> Remove strip background
+        # legend.position = "bottom", #Move legend to bottom
+        legend.position = c(0.75, 0), # Give a position in x y coordinate
+        legend.direction = "horizontal",
+        legend.background = element_rect(fill = "black"),
+        legend.text = element_text(color = "white", size = 5),
+        legend.title = element_text(color = "white", size = 6)) +
+  guides(fill = guide_colorbar(title.position = "top", #Guides function is a argument for legend
+                               title.hjust = 0.5)) # Middle justification  
+        
 ggsave("figures/global_anomaly.png", width = 10, height = 4.5, units = "in")
