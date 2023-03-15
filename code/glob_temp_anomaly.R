@@ -55,7 +55,10 @@ t_data <- as.data.table(t_anomaly.array) %>%  # it automatically removes the NA 
   mutate(decade = 10 * floor(year / 10),  #Add decade labels to a plot by using "floor" argument. "Floor" argument neglects all decimal point.
          single = year %% 10) #mutate a remainder of the division
   
-t_data %>% 
+t_data %>%
+  mutate(t_diff = case_when(t_diff < -4 ~ -4,
+                            t_diff > 4 ~ 4,
+                            TRUE ~ t_diff)) %>% 
   # filter(year == 2000) %>% 
   ggplot(aes(x = longtitude,
              y = latitude,
@@ -73,9 +76,11 @@ t_data %>%
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
         panel.background = element_rect(fill = "black"),
-        plot.background = element_rect(fill = "black"),
+        plot.background = element_rect(fill = "black", color = "black"),
         panel.grid = element_blank(),
         strip.text.x = element_blank(), #Facet grid --> remove above label on facet grid
         strip.text.y.left = element_text(angle = 0, #Facet grid --> rotate strip text
                                          color = "white"),
         strip.background = element_blank()) #Facet grid --> Remove strip background
+
+ggsave("figures/global_anomaly.png", width = 10, height = 4.5, units = "in")
