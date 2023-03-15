@@ -3,9 +3,9 @@ library(R.utils) #For unzip the file
 library(ncdf4) ## package for netcdf manipulation
 library(data.table)
 library(lubridate) #package for data and time
-library(ggridges) # Package for creating a ridgeline plot
 
-# The original plot is from NASA website: https://svs.gsfc.nasa.gov/4891
+
+# The original plot is from NASA website: https://www.climate-lab-book.ac.uk/?s=mapping+global+temperature
 #Download a file from the NASA website
 url <- "https://data.giss.nasa.gov/pub/gistemp/gistemp250_GHCNv4.nc.gz"
 download.file(url, destfile = "gistemp250_GHCNv4.nc.gz") #It is a gZip file
@@ -58,4 +58,9 @@ t_data %>%
   ggplot(aes(x = longtitude,
              y = latitude,
              fill = t_diff)) + # geom_raster take a color from "fill" argument not a "color" argument
-  geom_raster()
+  geom_raster() +
+  scale_fill_gradient2(low = "darkblue",
+                       mid = "white",
+                       high = "darkred",
+                       midpoint = 0) +
+  coord_fixed() #Ensure the scale that are 1 degree of longtitude = 1 degree of latitude
