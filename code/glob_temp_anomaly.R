@@ -54,7 +54,7 @@ t_data <- as.data.table(t_anomaly.array) %>%  # it automatically removes the NA 
   filter(year >= 1950 & year < 2022) 
 
 t_data %>% 
-  filter(year == 2000) %>% 
+  # filter(year == 2000) %>% 
   ggplot(aes(x = longtitude,
              y = latitude,
              fill = t_diff)) + # geom_raster take a color from "fill" argument not a "color" argument
@@ -63,6 +63,7 @@ t_data %>%
                        mid = "white",
                        high = "darkred",
                        midpoint = 0) +
+  facet_wrap(~year, ncol = 10, nrow = 8) +
   coord_fixed(expand = FALSE) + #Ensure the scale that are 1 degree of longtitude = 1 degree of latitude. "Expand = FALSE" is a argument to remove a margin in a plot
   labs(x = NULL,
        y = NULL) +
