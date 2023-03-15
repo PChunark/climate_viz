@@ -53,4 +53,9 @@ t_data <- as.data.table(t_anomaly.array) %>%  # it automatically removes the NA 
 ######
   filter(year >= 1950 & year < 2022) 
 
-  
+t_data %>% 
+  filter(year == 2000) %>% 
+  ggplot(aes(x = longtitude,
+             y = latitude,
+             fill = t_diff)) + # geom_raster take a color from "fill" argument not a "color" argument
+  geom_raster()
