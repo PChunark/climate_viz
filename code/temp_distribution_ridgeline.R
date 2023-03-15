@@ -51,12 +51,46 @@ t_data <- as.data.table(t_anomaly.array) %>%  # it automatically removes the NA 
   # ggplot(aes(x = year, y = n)) + 
   # geom_line() #See sampling we have by a year
 ######
-  filter(year >= 1950 & year < 2022) #The sampling number steeply increases since 1950
-  
+  filter(year >= 1950 & year < 2022) %>%  #The sampling number steeply increases since 1950
+  group_by(year) %>% 
+  mutate(t_ave = mean(t_diff))
 
 t_data %>% 
-  filter(year == 2000) %>% 
-  ggplot(aes(x = longtitude,
-             y = latitude,
-             fill = t_diff)) + #geom_raster will take a color from "fill" function not from a "color" function. 
-  geom_raster()
+  # filter(year %in% c(1950, 1980, 2000, 2020)) %>% #Select few year to see data
+  ggplot(aes(x = t_diff, 
+             y = factor(year, #year is a continues variable. But Geom_ridge need a factor in y axis. factor(y) is used.
+                        seq(2021, 1950, -1)), 
+             fill = t_ave)) + 
+  # geom_density(alpha = 0.3) #See the density of the data
+  geom_density_ridges(bandwidth = 0.3,
+                      scale = 3,  #Adjust the scale of the bandwidth for overlap between each ridgeline plot
+                      size = 0.2,
+                      color = "white")+
+  scale_fill_gradient2(low = "darkblue", 
+                       mid = "white", 
+                       high = "darkred",
+                       midpoint = 0,
+                       guide = "none") + #remove legend
+  coord_cartesian(xlim = c(-5,5)) + # Set the x scale
+  scale_x_continuous(breaks = seq(-4,4,2)) + 
+  scale_y_discrete(breaks = seq(1950, 2020, 10)) +
+  labs(y = NULL,
+       x = "Temperature anomaly (\u00B0 C)",
+       title = "Land Temperature Anomaly Distribution") +
+  theme(text = element_text(color = "white"),
+        panel.background = element_rect(fill = "black"),
+        plot.background = element_rect(fill = "black"),
+        panel.grid = element_blank(),
+        axis.text = element_text(color = "white"),
+        axis.ticks = element_line(color = "white"),
+        axis.ticks.y = element_blank(),
+        axis.line.x = element_line(color = "white"),
+        axis.line.y = element_blank()
+  )
+
+ggsave("figures/temp_distribution.png", height = 6, width = 4)
+
+nc_close(nc_data) #close the connection between data
+unlink("gistemp250_GHCNv4.nc") #unlink file that we tell gitignore to ingore. The file will no longer in the directory
+unlink("gistemp250_GHCNv4.txt")
+unlink("gistemp250_GHCNv4.nc.gz")
