@@ -64,7 +64,8 @@ t_data %>%
                         seq(2021, 1950, -1)), 
              fill = t_ave)) + 
   # geom_density(alpha = 0.3) #See the density of the data
-  geom_density_ridges(bandwidth = 0.3) +
+  geom_density_ridges(bandwidth = 0.3,
+                      scale = 3) + #Adjust the scale of the bandwidth for overlap between each ridgeline plot
   scale_fill_gradient2(low = "darkblue", 
                        mid = "white", 
                        high = "darkred",
