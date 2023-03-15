@@ -2,7 +2,8 @@ library(tidyverse)
 library(R.utils) #For unzip the file
 library(ncdf4) ## package for netcdf manipulation
 library(data.table)
-library(lubridate)
+library(lubridate) #package for data and time
+library(ggridges) # Package for creating a ridgeline plot
 
 #Download a file from the NASA website
 url <- "https://data.giss.nasa.gov/pub/gistemp/gistemp250_GHCNv4.nc.gz"
@@ -50,3 +51,8 @@ t_data <- as.data.table(t_anomaly.array) %>%  # it automatically removes the NA 
   # geom_line() #See sampling we have by a year
 ######
   filter(year >= 1950) #The sampling number steeply increases since 1950
+
+t_data %>% 
+  filter(year %in% c(2018, 2019,2020)) %>% #Select few year to see data
+  ggplot(aes(x = t_diff, group = year, fill = year)) +
+  geom_density(alpha = 0.3) #See the density of the data
