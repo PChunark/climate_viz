@@ -6,9 +6,14 @@ bands <- c("64N-90N", "44N-64N", "24N-44N", "EQU-24N",
 
 # the original plot is from NASA: https://svs.gsfc.nasa.gov/4978
 url <- "https://data.giss.nasa.gov/gistemp/tabledata_v4/ZonAnn.Ts+dSST.csv"
-read_csv(url) %>% 
+
+zone_data <- read_csv(url) %>% 
   select(year = Year,
          all_of(bands)) %>% 
   pivot_longer(-year, names_to = "zone", values_to = "t_diff") %>% 
   mutate(zone = factor(zone, levels = bands ))
 
+zone_data %>% 
+  ggplot(aes(x = t_diff, 
+             y = zone)) + 
+  geom_point()
