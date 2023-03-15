@@ -59,7 +59,10 @@ t_data <- as.data.table(t_anomaly.array) %>%  # it automatically removes the NA 
   
 t_data %>% 
   # filter(year %in% c(1950, 1980, 2000, 2020)) %>% #Select few year to see data
-  ggplot(aes(x = t_diff, y = factor(year), fill = t_ave)) + #year is a continues variable. But Geom_ridge need a factor in y axis. factor(y) is used.
+  ggplot(aes(x = t_diff, 
+             y = factor(year, #year is a continues variable. But Geom_ridge need a factor in y axis. factor(y) is used.
+                        seq(2021, 1950, -1)), 
+             fill = t_ave)) + 
   # geom_density(alpha = 0.3) #See the density of the data
   geom_density_ridges(bandwidth = 0.3) +
   scale_fill_gradient2(low = "darkblue", 
