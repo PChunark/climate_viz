@@ -68,4 +68,7 @@ t_data %>%
   scale_fill_gradient2(low = "darkblue", 
                        mid = "white", 
                        high = "darkred",
-                       midpoint = 0)
+                       midpoint = 0) +
+  coord_cartesian(xlim = c(-5,5)) + # Set the x scale
+  scale_x_continuous(breaks = seq(-4,4,2)) + 
+  scale_y_discrete(seq())
