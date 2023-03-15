@@ -75,18 +75,20 @@ t_data %>%
              switch = "y") + #Switch year label from the right to the left side of the plot
   coord_fixed(expand = FALSE) + #Ensure the scale that are 1 degree of longtitude = 1 degree of latitude. "Expand = FALSE" is a argument to remove a margin in a plot
   labs(x = NULL,
-       y = NULL) +
+       y = NULL,
+       title = "Global annual temperature anomalies between 1950 and 2021") +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
         panel.background = element_rect(fill = "black"),
         plot.background = element_rect(fill = "black", color = "black"),
+        plot.title = element_text(color = "white", face = "bold"),
         panel.grid = element_blank(),
         strip.text.x = element_blank(), #Facet grid --> remove above label on facet grid
         strip.text.y.left = element_text(angle = 0, #Facet grid --> rotate strip text
                                          color = "white"),
         strip.background = element_blank(), #Facet grid --> Remove strip background
         # legend.position = "bottom", #Move legend to bottom
-        legend.position = c(0.75, 0), # Give a position in x y coordinate
+        legend.position = c(0.75, 0.03), # Give a position in x y coordinate
         legend.direction = "horizontal",
         legend.background = element_rect(fill = "black"),
         legend.text = element_text(color = "white", size = 5),
