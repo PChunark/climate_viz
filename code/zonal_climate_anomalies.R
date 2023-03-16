@@ -39,10 +39,15 @@ zone_data %>%
                        midpoint = 0,
                        guide = "none") + #remove legend
   labs(x = "Temperature anomaly (\u00B0C)",
-       y = NULL) +
+       y = NULL,
+       title = "Variation in annual temperature anomaly by\nlatitude (1880-2021)",
+       subtitle = "Bars for 2021 are colored by the size of the anomaly") +
   theme(
     plot.background = element_rect(fill = "black", color = "black"),
     panel.background = element_rect(fill = "black"),
+    plot.title = element_text(color = "white", face = "bold"),
+    plot.title.position = "plot", #give a title on y axis
+    plot.subtitle = element_text(color = "grey", size = 8),
     axis.text = element_text(color = "white"),
     axis.title = element_text(color = "white"),
     panel.grid.major.x = element_line(color = "gray", size = 0.25),
