@@ -17,4 +17,14 @@ zone_data <- read_csv(url) %>%
 zone_data %>% 
   ggplot(aes(x = t_diff, xend = t_diff, 
              y = zone_position - 0.25, yend = zone_position+0.25)) + 
-  geom_segment()
+  geom_segment(color = "black", 
+               alpha = 0.25)+ #Adjust the transparency
+  scale_y_continuous(breaks = 1:8, # Break y axis into 8 parts 
+                     labels = bands) + #Give the labels to y axis equal to bands
+  scale_x_continuous(breaks = seq(-3 ,4, 1),
+                     labels = seq(-3 ,4, 1),
+                     limits = c(-3, 4)) +
+  labs(x = "Temperature anomaly (\u00B0C)",
+       y = NULL)
+
+ggsave("figures/latitude_anomaly.png", width = 4, height = 3, units = "in")
