@@ -40,3 +40,5 @@ vignettes/*.pdf
 
 #Ignore download data file
 gistemp*
+
+renv/
