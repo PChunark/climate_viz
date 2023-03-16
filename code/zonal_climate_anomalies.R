@@ -11,9 +11,10 @@ zone_data <- read_csv(url) %>%
   select(year = Year,
          all_of(bands)) %>% 
   pivot_longer(-year, names_to = "zone", values_to = "t_diff") %>% 
-  mutate(zone = factor(zone, levels = bands ))
+  mutate(zone = factor(zone, levels = bands ),
+         zone_position = as.numeric(zone))
 
 zone_data %>% 
-  ggplot(aes(x = t_diff, 
-             y = zone)) + 
-  geom_point()
+  ggplot(aes(x = t_diff, xend = t_diff, 
+             y = zone_position - 0.25, yend = zone_position+0.25)) + 
+  geom_segment()
