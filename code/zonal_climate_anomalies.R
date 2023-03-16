@@ -25,7 +25,9 @@ zone_data %>%
   geom_segment(color = "white", 
                alpha = 0.25)+ #Adjust the transparency
   geom_segment(data = current_year, #Add a current year to the plot with color
-               aes(color = t_diff)) +
+               aes(color = t_diff),
+               size = 2,
+               lineend = "round") + #Round the line end
   scale_y_continuous(breaks = 1:8, # Break y axis into 8 parts 
                      labels = bands) + #Give the labels to y axis equal to bands
   scale_x_continuous(breaks = seq(-3 ,4, 1),
