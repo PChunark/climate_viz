@@ -14,16 +14,28 @@ zone_data <- read_csv(url) %>%
   mutate(zone = factor(zone, levels = bands ),
          zone_position = as.numeric(zone))
 
+#Add data for current year
+current_year <-
+  zone_data %>% 
+  filter(year == 2021)
+
 zone_data %>% 
   ggplot(aes(x = t_diff, xend = t_diff, 
              y = zone_position - 0.25, yend = zone_position+0.25)) + 
   geom_segment(color = "white", 
                alpha = 0.25)+ #Adjust the transparency
+  geom_segment(data = current_year, #Add a current year to the plot with color
+               aes(color = t_diff)) +
   scale_y_continuous(breaks = 1:8, # Break y axis into 8 parts 
                      labels = bands) + #Give the labels to y axis equal to bands
   scale_x_continuous(breaks = seq(-3 ,4, 1),
                      labels = seq(-3 ,4, 1),
                      limits = c(-3, 4)) +
+  scale_color_gradient2(low = "darkblue", #Set color for a current year data
+                       mid = "white",
+                       high = "darkred",
+                       midpoint = 0,
+                       guide = "none") + #remove legend
   labs(x = "Temperature anomaly (\u00B0C)",
        y = NULL) +
   theme(
