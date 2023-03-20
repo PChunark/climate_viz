@@ -26,3 +26,8 @@ https://www.youtube.com/watch?v=W1QH83twaak
 
 
 Enjoy learning R language!!
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
