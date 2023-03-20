@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# climate_viz [](https://img.shields.io/github/languages/code-size/PChunark/climate_viz?color=red&style=plastic)
-=======
-# climate_viz (https://img.shields.io/github/languages/code-size/PChunark/climate_viz?color=red&style=plastic)
->>>>>>> 066f62b5755e7a9ea0de020121951226baa643c4
+# climate_viz 
 This repository is solely for my R learning.
 The repository organization follows the Prof. Pat from Riffomonas Project on youtube channel.
 Riffomonas Project channel follow this link https://www.youtube.com/@Riffomonas.
