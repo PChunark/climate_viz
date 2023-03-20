@@ -1,6 +1,5 @@
 # climate_viz 
 ![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)
-\n
 
 This repository is solely for my R learning.
 The repository organization follows the Prof. Pat from Riffomonas Project on youtube channel.
