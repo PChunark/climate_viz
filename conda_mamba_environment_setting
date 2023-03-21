@@ -1,0 +1,99 @@
+# This text is for remind me how to use conda command in "anaconda prompt"
+
+# Check conda version
+conda --version
+
+# Update the conda version
+conda update -n base -c defaults conda
+  
+  Meaning: update the conda in the base environment (-n base) from the defaults channel (-c defaults)
+  
+  Definition are as follows:
+  -n base: -n is an environment
+           base is a name of an environment
+  -c defaults: -c is a channel in conda
+               defaults is a channel name in conda
+              
+# Install mamba
+conda install -n base -c conda-forge mamba
+
+# Check mamba version
+mamba --version
+
+# Create an environment named "viz" from climate_viz folder in R
+mamba create -n viz -c conda-forge c- bioconda c-R r-base=4.1 r-tidyverse=1.3.1
+
+  Meaning: Using mamba to create (mamba create) an environment named as "viz" (-n viz) from channel
+           conda-forge (-c conda-forge), bioconda (-c bioconda), R (-c R) and select software we want.
+           The software we want is R base version (r-base=4.1) and install "tidyverse" package and specify
+           tidyverse version (r-tidyverse=1.3.1)
+           
+# To activate/deactivate a created environment
+conda activate viz
+conda deactivate
+
+# Look at the environment that we just created 
+mamba env list
+
+# To check which R version are used in a created environment
+which R
+
+# Check R version
+R --version
+
+# Configuring R in our viz environment
+# Check the R version
+R
+
+# Find a location of a package we are using in R
+R
+find.package("tidyverse") (If the index of library path is not the first, we 
+                           need to organize the path. We create the .Rprofile 
+                           file)
+
+# First, we should change the working directory 
+cd D:\Rstudio\climate_viz
+
+# To see the .Rprofile, we need to see hidden files
+ls -a
+
+# Create .Rprofile to rearrange the path
+atom .Rprofile (Using Atom software (a text editor) to create .Rprofile)
+notepad .Rprofile (Using notepad (a text editor) to create .Rprofile)
+
+## In text editor in R library path ##
+.libPaths(c(.libPaths()[2], .libPaths()[1]))
+
+# Installing a R package
+mamba install -n viz -c conda-forge -c bioconda -c R r-gganimate
+
+##### This part is the most important #####
+## It is better to create a file of packages in order to tell the enduser ##
+
+# Open a text editor
+notepad
+
+# Save as
+config.yml
+
+name: viz
+channels:
+ - conda-forge
+ - bioconda
+ - defaults
+ - R
+dependencies:
+ - r-base=4.1
+ - r-tidyverse=1.3.1
+ - r-gganimate
+ - r-plotly
+ 
+# We need to deactivate the viz environment and check environment list
+conda deactivate
+mamba env list
+
+# Remove the viz environment before using "config.yml"
+mamba env remove -n viz
+
+# Create an environment from "config.yml" file
+mamba env create -f config.yml
