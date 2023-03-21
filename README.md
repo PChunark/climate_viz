@@ -1,4 +1,6 @@
 # climate_viz
+![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)
+![GitHub repo size](https://img.shields.io/github/repo-size/PChunark/climate_viz)
 This repository is solely for my R learning.
 The repository organization follows the Prof. Pat from Riffomonas Project on youtube channel.
 Riffomonas Project channel follow this link https://www.youtube.com/@Riffomonas.
@@ -24,6 +26,9 @@ https://www.youtube.com/watch?v=kU4O1LXdz2Y
 https://www.youtube.com/watch?v=W1QH83twaak
 13. A rug chart in R with ggplot2's geom_segment showing latitudinal temperature anomalies. Follow the link CC228 --> https://www.youtube.com/watch?v=UbuKFW5eul8&t=419s
 
+## Creating an environment
+1. Using renv to track the version of your packages in R. Follow the link CC229 --> https://www.youtube.com/watch?v=yc7ZB4F_dc0
+2. How to create a conda or mamba environment for R programming to enhance reproducibility. Follow the link CC230 --> https://www.youtube.com/watch?v=QI2Qg_1aySc&t=1s
 
 Enjoy learning R language!!
 
