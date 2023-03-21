@@ -30,6 +30,8 @@ https://www.youtube.com/watch?v=W1QH83twaak
 1. Using renv to track the version of your packages in R. Follow the link CC229 --> https://www.youtube.com/watch?v=yc7ZB4F_dc0
 2. How to create a conda or mamba environment for R programming to enhance reproducibility. Follow the link CC230 --> https://www.youtube.com/watch?v=QI2Qg_1aySc&t=1s
 
+In this case, it is better to use conda & mamba and create a configuration file in .yml (YAML).
+
 Enjoy learning R language!!
 
 ## License
