@@ -1,5 +1,9 @@
 library(tidyverse)
 
+# NASA GISS data: https://data.giss.nasa.gov/gistemp/
+# For this data we select Global-mean monthly, seasonal, and annual mean:
+# https://data.giss.nasa.gov/gistemp/tabledata_v4/T_AIRS/GLB.Ts+dSST.csv
+
 # 1. First plot
 t_diff <- 
   read_csv("data/GLB.Ts+dSST.csv", skip = 1, na = "***") %>% #load CSV file, skip 1st rows, na value in the data is "***"
