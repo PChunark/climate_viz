@@ -8,4 +8,6 @@ library(glue)
 
 inventory_url <- "https://www.ncei.noaa.gov/pub/data/ghcn/daily/ghcnd-inventory.txt"
 
-read_tsv(inventory_url)
+inventory <-read_table(inventory_url,
+                       col_names = c("station", "lat", "lon", "variable", "start", "end"))
+inventory
