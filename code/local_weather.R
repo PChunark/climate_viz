@@ -48,4 +48,14 @@ local_weather <- read_csv(station_daily,
                  select(date, variable, value) %>% 
                  pivot_wider(names_from = "variable", values_from = "value", values_fill = 0) %>%  # convert to wider dataframe
                  select(date, TMAX, TMIN, PRCP) %>% 
-                 mutate(date = ymd(date)) #convert date format
+                 mutate(date = ymd(date), #convert date format
+                        TMAX = TMAX / 10, # convert tenths of degree C to degree C 
+                        TMIN = TMIN / 10, # convert tenths of degree C to degree C
+                        PRCP = PRCP / 10) %>%  # convert tenths of mm to mm
+                 rename_all(tolower) # rename all column name to lower case
+  
+  
+#Identify problematic data with line plots
+local_weather %>% 
+  ggplot(aes(x = date, y = TMAX)) +
+  geom_line()
