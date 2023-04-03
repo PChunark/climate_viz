@@ -28,6 +28,7 @@ https://www.youtube.com/watch?v=W1QH83twaak
 13. A rug chart in R with ggplot2's geom_segment showing latitudinal temperature anomalies. Follow the link CC228 --> https://www.youtube.com/watch?v=UbuKFW5eul8&t=419s
 14. Scraping weather data from the internet with R and the tidyverse.
 Follow the link CC231 --> https://www.youtube.com/watch?v=V5Df6vw4-e8
+15. Removing outliers in R with tools from dplyr and ggplot2. Follow the link CC232 --> https://www.youtube.com/watch?v=rbm2pYSPFlU&t=11s
 
 
 Enjoy learning R language!!
