@@ -1,5 +1,6 @@
-library(tidyverse)
-library(glue)
+library(tidyverse) #data manipulation package
+library(glue) #template literal package
+library(lubridate) # date time package
 
 # NOAA climate data: https://www.ncei.noaa.gov/cdo-web/datasets
 # Select Daily summary: https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc:C00861/html
@@ -38,3 +39,13 @@ my_station <- inventory %>%
               pull(station) #%>% # Get station name as a variable
               #arrange(d_km) #arrange d_km from the lowest to the highest value (Ascending order)
 
+#Tidy local weather station data
+station_daily <- glue("https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/{my_station}.csv.gz")
+
+#Search for readme station data
+local_weather <- read_csv(station_daily,
+                          col_names = c("station", "date", "variable", "value", "a", "b", "c", "d")) %>% 
+                 select(date, variable, value) %>% 
+                 pivot_wider(names_from = "variable", values_from = "value", values_fill = 0) %>%  # convert to wider dataframe
+                 select(date, TMAX, TMIN, PRCP) %>% 
+                 mutate(date = ymd(date)) #convert date format
