@@ -29,6 +29,8 @@ https://www.youtube.com/watch?v=W1QH83twaak
 14. Scraping weather data from the internet with R and the tidyverse.
 Follow the link CC231 --> https://www.youtube.com/watch?v=V5Df6vw4-e8
 15. Removing outliers in R with tools from dplyr and ggplot2. Follow the link CC232 --> https://www.youtube.com/watch?v=rbm2pYSPFlU&t=11s
+16. Using dplyr's group_by function with and without summarize. Follow the link CC233 --> 
+https://www.youtube.com/watch?v=9D1wZ2zWyqI&t=68s
 
 
 Enjoy learning R language!!
