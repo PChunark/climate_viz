@@ -53,9 +53,13 @@ local_weather <- read_csv(station_daily,
                         TMIN = TMIN / 10, # convert tenths of degree C to degree C
                         PRCP = PRCP / 10) %>%  # convert tenths of mm to mm
                   rename_all(tolower) %>%  # rename all column name to lower case
-                 # filter(tmax > 1) # This approach will remove other variable
-                  mutate(tmax = if_else(tmax > 1, tmax,NA_real_))
-  
+                 # filter(tmax > 1) # This approach will remove other variable. Select 1 because tmax is zero. It is not possible.
+                  mutate(tmax = if_else(tmax > 1, tmax,NA_real_)) %>%  # This approch will not remove other variable. Show how to identify weird data
+                         # date = if_else(date == "1951-01-01", as.Date(NA_character_), date)) %>% #Give NA value to a specific value
+                  drop_na(tmax, prcp) #Remove NA value in tmax column
+                         
+                         
+                         
 #Identify problematic data with line plots in tmax
 local_weather %>% 
   ggplot(aes(x = date, y = tmax)) +
