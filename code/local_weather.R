@@ -54,12 +54,10 @@ local_weather <- read_csv(station_daily,
                         PRCP = PRCP / 10) %>%  # convert tenths of mm to mm
                   rename_all(tolower) %>%  # rename all column name to lower case
                  # filter(tmax > 1) # This approach will remove other variable. Select 1 because tmax is zero. It is not possible.
-                  mutate(tmax = if_else(tmax > 1, tmax,NA_real_)) %>%  # This approch will not remove other variable. Show how to identify weird data
+                  mutate(tmax = if_else(tmax > 1, tmax,NA_real_)) #%>%  # This approch will not remove other variable. Show how to identify weird data
                          # date = if_else(date == "1951-01-01", as.Date(NA_character_), date)) %>% #Give NA value to a specific value
-                  drop_na(tmax, prcp) #Remove NA value in tmax column
-                         
-                         
-                         
+                  #drop_na(tmax, prcp) #Remove NA value in tmax column
+                   
 #Identify problematic data with line plots in tmax
 local_weather %>% 
   ggplot(aes(x = date, y = tmax)) +
@@ -86,5 +84,5 @@ local_weather %>%
 #Identify problematic data with histogram in prcp
 local_weather %>% 
   ggplot(aes(x = prcp)) +
-  geom_histogram(binwidth = 8) + # give 1 degree binwidth
-  scale_y_continuous(limits = c(0,100))
+  geom_histogram(binwidth = 8) #+ # give 1 degree binwidth
+  # scale_y_continuous(limits = c(0,100))
