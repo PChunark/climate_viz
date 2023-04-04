@@ -52,10 +52,35 @@ local_weather <- read_csv(station_daily,
                         TMAX = TMAX / 10, # convert tenths of degree C to degree C 
                         TMIN = TMIN / 10, # convert tenths of degree C to degree C
                         PRCP = PRCP / 10) %>%  # convert tenths of mm to mm
-                 rename_all(tolower) # rename all column name to lower case
+                  rename_all(tolower) %>%  # rename all column name to lower case
+                 # filter(tmax > 1) # This approach will remove other variable
+                  mutate(tmax = if_else(tmax > 1, tmax,NA_real_))
   
-  
-#Identify problematic data with line plots
+#Identify problematic data with line plots in tmax
 local_weather %>% 
-  ggplot(aes(x = date, y = TMAX)) +
+  ggplot(aes(x = date, y = tmax)) +
   geom_line()
+
+local_weather %>% 
+  slice_max(n=6, tmax)
+local_weather %>% 
+  slice_min(n=6, tmax)
+#Identify problematic data with histogram in tmax
+local_weather %>% 
+  ggplot(aes(x = tmax)) +
+  geom_histogram(binwidth = 1.2) # give 1 degree binwidth
+
+#Identify problematic data with histogram in prcp
+local_weather %>% 
+  ggplot(aes(x = date, y = prcp)) +
+  geom_line()
+
+local_weather %>% 
+  slice_max(n=6, prcp)
+local_weather %>% 
+  slice_min(n=6, prcp)
+#Identify problematic data with histogram in prcp
+local_weather %>% 
+  ggplot(aes(x = prcp)) +
+  geom_histogram(binwidth = 8) + # give 1 degree binwidth
+  scale_y_continuous(limits = c(0,100))
