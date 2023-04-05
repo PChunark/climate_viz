@@ -5,7 +5,8 @@ source("code/local_weather.R")
 this_year <- year(today())
 
 local_weather %>% 
-  select(date, tmax) %>% 
+  select(date, tmax) %>%
+  drop_na(tmax) %>% 
   mutate(year = year(date)) %>% 
   filter(year != 1891 & year != this_year) %>%
   group_by(year) %>% # calculate temperature for each year
@@ -31,7 +32,8 @@ local_weather %>%
 
 #Using group_by without a summarize function
 local_weather %>% 
-  select(date, tmax) %>% 
+  select(date, tmax) %>%
+  drop_na(tmax) %>% 
   mutate(year = year(date),
          month = month(date))%>% 
   filter(year != 1891) %>%
@@ -42,8 +44,8 @@ local_weather %>%
   mutate(normalized_range = year >= 1951 & year <= 1980,
          normalized_temp = sum(tmax * normalized_range)/sum(normalized_range),
          t_diff = tmax - normalized_temp) %>% #Average temperature for each year 
-  ungroup() #Ungroup the group by function
+  ungroup() %>%  #Ungroup the group by function
   # filter(month == 1) #Check the normalized temp whether it is the same for each year
   # ggplot(aes(x = month, y = normalized_temp)) + geom_line() #Check average temperature
-  ggplot(aes(x = month, y = tmax, group = year, color = year)) + 
+  ggplot(aes(x = month, y = t_diff, group = year, color = year)) + 
   geom_line()
