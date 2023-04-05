@@ -7,8 +7,12 @@ this_year <- year(today())
 local_weather %>% 
   select(date, tmax) %>% 
   mutate(year = year(date)) %>% 
-  filter(year != 1951 & year != this_year) %>% 
+  filter(year != 1951 & year != this_year) %>%
   group_by(year) %>% # calculate temperature for each year
-  summarize()
-
-
+  summarize(tmax = mean(tmax)) %>%
+  mutate(normalize_range = (year >= 1951 & year <= 1980), #Add normalize range because we gonna compare tmax with 1951 and 1980)
+         normalize_mean = sum(tmax * normalize_range)/sum(normalize_range), #Calculate mean
+         t_diff = tmax - normalize_mean) %>% 
+         ggplot(aes(x = year, y = t_diff)) +
+  geom_line() + 
+  geom_smooth()
