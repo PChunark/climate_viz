@@ -46,7 +46,7 @@ station_daily <- glue("https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/
 local_weather <- read_csv(station_daily,
                           col_names = c("station", "date", "variable", "value", "a", "b", "c", "d")) %>% 
                  select(date, variable, value) %>% 
-                 pivot_wider(names_from = "variable", values_from = "value", values_fill = 0) %>%  # convert to wider dataframe
+                 pivot_wider(names_from = "variable", values_from = "value") %>%  # convert to wider dataframe
                  select(date, TMAX, TMIN, PRCP) %>% 
                  mutate(date = ymd(date), #convert date format
                         TMAX = TMAX / 10, # convert tenths of degree C to degree C 
