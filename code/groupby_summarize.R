@@ -40,6 +40,10 @@ local_weather %>%
             .groups = "drop") %>%  #Always use!! Command for dropping group by function
   group_by(month) %>% 
   mutate(normalized_range = year >= 1951 & year <= 1980,
-         normalized_temp = sum(tmax * normalized_range)/sum(normalized_range))
+         normalized_temp = sum(tmax * normalized_range)/sum(normalized_range),
+         t_diff = tmax - normalized_temp) %>% #Average temperature for each year 
+  ungroup() #Ungroup the group by function
+  # filter(month == 1) #Check the normalized temp whether it is the same for each year
+  # ggplot(aes(x = month, y = normalized_temp)) + geom_line() #Check average temperature
   ggplot(aes(x = month, y = tmax, group = year, color = year)) + 
   geom_line()
