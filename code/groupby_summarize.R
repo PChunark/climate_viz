@@ -28,3 +28,18 @@ local_weather %>%
             .groups = "drop") %>%  #Always use!! Command for dropping group by function
   ggplot(aes(x = month, y = tmax, group = year, color = year)) + 
   geom_line()
+
+#Using group_by without a summarize function
+local_weather %>% 
+  select(date, tmax) %>% 
+  mutate(year = year(date),
+         month = month(date))%>% 
+  filter(year != 1891) %>%
+  group_by(year, month) %>% 
+  summarize(tmax = mean(tmax), 
+            .groups = "drop") %>%  #Always use!! Command for dropping group by function
+  group_by(month) %>% 
+  mutate(normalized_range = year >= 1951 & year <= 1980,
+         normalized_temp = sum(tmax * normalized_range)/sum(normalized_range))
+  ggplot(aes(x = month, y = tmax, group = year, color = year)) + 
+  geom_line()
