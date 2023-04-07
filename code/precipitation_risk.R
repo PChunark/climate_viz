@@ -5,6 +5,11 @@ pretty_labels <- c("prob_prcp" = "Probability of precipitation",
                    "mean_prcp" = "Average amount of\nprecipitation by day (mm)",
                    "mean_event" = "Average amount of\nprecipitation by event (mm)" )
 
+#Create variables for a vertical line
+today_month <- month(today())
+today_day <- day(today())
+today_date <- ymd(glue("2020-{today_month}={today_day}"))
+
 local_weather %>% 
   select(date, prcp) %>% 
   mutate(day = day(date),
@@ -18,11 +23,13 @@ local_weather %>%
             .groups = "drop"
             ) %>% 
   mutate(date = ymd(glue("2020-{month}-{day}"))) %>% #Create for scale x date only. We will not see "2020" in the plot.
+  select(-month, -day) %>% #Deselect month and day column
   pivot_longer(cols = c(prob_prcp, mean_prcp, mean_event)) %>% #Pivot the specific column
   mutate(name = factor(name, levels = c("prob_prcp", "mean_prcp", "mean_event"))) %>% 
   ggplot(aes(x = date, y = value)) +
   geom_line() +
   geom_hline(yintercept = 0) + #Add a zero line intercept for facet plot
+  geom_vline(xintercept = today_date, color = "red", size = 1) +#Add a today vertical line
   geom_smooth(se = FALSE) +
   facet_wrap(~name, ncol = 1, scales = "free_y",
              strip.position = "left",
@@ -30,6 +37,7 @@ local_weather %>%
   scale_y_continuous(limits = c(0, NA), expand = c(0,0)) + #Let the scale determine what to go up to.
   scale_x_date(date_breaks = "2 months",
                date_labels = "%B") +
+  coord_cartesian(clip = "off") + #Clip anything that outside the plot
   labs(
         x = NULL,
         y = NULL
