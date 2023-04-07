@@ -22,6 +22,9 @@ local_weather %>%
   scale_color_manual(breaks = c(F,T), #Give the color of lines
                      values = c("lightgrey", "dodgerblue")) + 
   scale_size_manual(breaks = c(F,T),
-                    values = c(0.3,0.5)) #Adjust the size of lines
- 
+                    values = c(0.3,0.5)) + #Adjust the size of lines
+  scale_x_date(date_labels = "%B", #Give a custom month label
+               date_breaks = "2 months") #Break months into 2 months
+  
+  
 ggsave("figures/cumulative_prcp.png", width = 6, height = 5)
