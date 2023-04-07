@@ -17,3 +17,25 @@ tmax_prcp %>%
              scales = "free_y" #Free the y scale axis
              ) +
   geom_smooth(se = FALSE)
+
+#Try to make a duel y axis
+#Scale the tmax between 0 and 1. It called a Normalization of the data.
+
+scaled_tmax_prcp <- tmax_prcp %>% 
+  mutate(
+         tmax_tr = (tmax - min(tmax))/(max(tmax)-min(tmax)),
+         tmax_min = min(tmax),
+         tmax_max = max(tmax), #%>%
+  # summarize(min = min(tmax_tr), max = max(tmax_tr)) #Check the maximun and the minimum
+         prcp_tr = (prcp - min(prcp))/(max(prcp)-min(prcp)),
+         prcp_min = min(prcp),
+         prcp_max = max(prcp))
+
+
+
+tmax_plot <- scaled_tmax_prcp %>% 
+  ggplot(aes(x = year, y = tmax_tr)) +
+  geom_line(color = "blue")
+
+tmax_plot + 
+  geom_line(aes(y = prcp_tr), color = "red")
