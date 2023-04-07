@@ -1,5 +1,10 @@
 source("code/local_weather.R")
 
+#Create labels as a vector to use in facet wrap
+pretty_labels <- c("prob_prcp" = "Probability of precipitation",
+                   "mean_prcp" = "Average amount of\nprecipitation by day (mm)",
+                   "mean_event" = "Average amount of\nprecipitation by event (mm)" )
+
 local_weather %>% 
   select(date, prcp) %>% 
   mutate(day = day(date),
@@ -19,7 +24,8 @@ local_weather %>%
   geom_line() +
   geom_smooth(se = FALSE) +
   facet_wrap(~name, ncol = 1, scales = "free_y",
-             strip.position = "left") +
+             strip.position = "left",
+             labeller = labeller(name = pretty_labels)) + #Rename the strip from labeller
   scale_y_continuous(limits = c(0, NA)) + #Let the scale determine what to go up to.
   scale_x_date(date_breaks = "2 months",
                date_labels = "%B") +
@@ -28,6 +34,7 @@ local_weather %>%
         y = NULL
       ) +
   theme(
-        strip.placement = "outside"
+        strip.placement = "outside",
+        strip.background = element_blank() #Remove strip background
   )
  
