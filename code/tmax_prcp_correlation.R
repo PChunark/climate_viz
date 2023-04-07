@@ -36,6 +36,21 @@ scaled_tmax_prcp <- tmax_prcp %>%
 tmax_plot <- scaled_tmax_prcp %>% 
   ggplot(aes(x = year, y = tmax_tr)) +
   geom_line(color = "blue")
-
+  
 tmax_plot + 
-  geom_line(aes(y = prcp_tr), color = "red")
+  geom_line(aes(y = prcp_tr), color = "red") +
+  scale_y_continuous(
+                     labels = seq(31,35,1),#Calculate the label in the y-axis
+                     breaks = (seq(31,35,1) - 31.4) / (34.5-31.4), #Calculate the normalize break 
+                     limits = (c(31,35)-31.4) / (34.5-31.4),
+                     name = "Average annual temperature",
+                     sec.axis = sec_axis(trans = ~., #Added the secondary axis (sec.axis) and not gonna transform the data.
+                                         labels = seq(0,2000,200),#Calculate the label in the y-axis
+                                         breaks = (seq(0,2000,200) - 249) / (1957-249),# transforming the axis in label and break
+                                         name = "Total Precipitation (mm)"
+                                         )
+                    ) +
+  theme(
+        axis.title.y.left = element_text(color = "blue"),
+        axis.title.y.right = element_text(color = "red")
+  )
