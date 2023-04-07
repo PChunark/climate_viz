@@ -1,6 +1,7 @@
 source("code/local_weather.R")
 
-prcp_snow <- local_weather %>% 
+#Create annual precipitation and snow
+prcp_snow_annual <- local_weather %>% 
   drop_na() %>% 
   filter(snow > 0) %>% 
   mutate(year = year(date)) %>% 
@@ -9,7 +10,7 @@ prcp_snow <- local_weather %>%
             snow = sum(snow)) %>% 
   filter(year != 2023)
 
-prcp_snow %>% 
+prcp_snow_annual %>% 
   pivot_longer(-year) %>% 
   ggplot(aes(x = year, y = value))+
   geom_line() +
@@ -17,8 +18,17 @@ prcp_snow %>%
              ncol = 1,
              scales = "free_y")
 
-prcp_snow %>% 
+prcp_snow_annual %>% 
   ggplot(aes(x = prcp, y = snow, color = year))+
   geom_point()
 
-cor.test(prcp_snow$prcp, prcp_snow$snow)
+cor.test(prcp_snow_annual$prcp, prcp_snow_annual$snow)
+
+#Create an daily precipitation and snow
+local_weather %>% 
+  drop_na() %>% 
+  filter(snow > 0) %>% 
+  mutate(year = year(date)) %>% 
+  filter(year != 2023) %>% 
+  ggplot(aes(x = prcp, y = snow, color = year)) +
+  geom_point()
