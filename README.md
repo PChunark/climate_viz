@@ -35,6 +35,8 @@ https://www.youtube.com/watch?v=9D1wZ2zWyqI&t=68s
 https://www.youtube.com/watch?v=facMJFmsUlw
 18. Visualizing correlation with double y-axes using the ggplot2 R package. Follow the link CC235 -->
 https://www.youtube.com/watch?v=ir-NMcrYD-I
+19. Stylizing the appearance of facet labels with ggplot2's facet_wrap. Follow the link CC236 -->
+https://www.youtube.com/watch?v=v1hTB2b_YkE
 
 Enjoy learning R language!!
 
