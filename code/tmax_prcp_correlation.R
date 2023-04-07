@@ -40,13 +40,13 @@ tmax_plot <- scaled_tmax_prcp %>%
 tmax_plot + 
   geom_line(aes(y = prcp_tr), color = "red") +
   scale_y_continuous(
-                     labels = seq(31,35,1),#Calculate the label in the y-axis
-                     breaks = (seq(31,35,1) - 31.4) / (34.5-31.4), #Calculate the normalize break 
-                     limits = (c(31,35)-31.4) / (34.5-31.4),
+                     labels = seq(6,14,2),#Calculate the label in the y-axis
+                     breaks = (seq(6,14,2) - 7.3) / (13.3-7.3), #Calculate the normalize break 
+                     limits = (c(6,14)-7.3) / (13.3-7.3),
                      name = "Average annual temperature",
                      sec.axis = sec_axis(trans = ~., #Added the secondary axis (sec.axis) and not gonna transform the data.
-                                         labels = seq(0,2000,200),#Calculate the label in the y-axis
-                                         breaks = (seq(0,2000,200) - 249) / (1957-249),# transforming the axis in label and break
+                                         labels = seq(0,1200,200),#Calculate the label in the y-axis
+                                         breaks = (seq(0,1200,200) - 194) / (1049-194),# transforming the axis in label and break
                                          name = "Total Precipitation (mm)"
                                          )
                     ) +
