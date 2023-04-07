@@ -1,6 +1,12 @@
 source("code/local_weather.R")
 
+library(ggtext)
+library(scales)
+
 this_year <- year(today()) #Create an automate year
+this_month <- month(today(), label = TRUE, abbr = FALSE)
+this_day <- ordinal(day(today()))
+
 
 local_weather %>% 
   select(date, prcp) %>%
@@ -34,13 +40,20 @@ local_weather %>%
                      limits = c(0, 2200), #Give the limit to an axis
                      expand = c(0,0)) + #Remove the space between an axis
   theme(
+    plot.title.position = "plot", #Give left justify to the title
+    plot.title = element_textbox_simple( #This command is from "ggtext" package. It can wrap the text.
+                                        margin = margin(b = 10),
+                                        size = 16
+                                        ), 
     panel.background = element_blank(),
     panel.grid = element_blank(),
     axis.line = element_line()
        ) +
   labs(
     x = NULL,
-    y = "Cumulative precipitation (cm)"
+    y = "Cumulative precipitation (cm)",
+    title = glue("Though {this_month} {this_day}, the cumulative precipitation near EGAT main office, 
+                 Nonthaburi is<span style = 'color: dodgerblue'> below average </span> for {this_year}")
   )
   
 ggsave("figures/cumulative_prcp.png", width = 6, height = 5)
