@@ -24,7 +24,11 @@ local_weather %>%
   scale_size_manual(breaks = c(F,T),
                     values = c(0.3,0.5)) + #Adjust the size of lines
   scale_x_date(date_labels = "%B", #Give a custom month label
-               date_breaks = "2 months") #Break months into 2 months
-  
+               date_breaks = "2 months") + #Break months into 2 months
+  theme(
+    panel.background = element_blank(),
+    panel.grid = element_blank(),
+    axis.line = element_line()
+  )
   
 ggsave("figures/cumulative_prcp.png", width = 6, height = 5)
