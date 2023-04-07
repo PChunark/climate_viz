@@ -15,12 +15,24 @@ inventory <-read_table(inventory_url,
 
 #Find the location that we are living in. 
 # The location given in google map is in degree unit. We need to convert it to radian.
+
 # Location: EGAT T100 Building
+# my_lat <- 13.811979809223814 * 2 * pi/360 #EGAT main building lat
+# my_lon <- 100.5052562120295 * 2 * pi/360 #EGAT main building lon
 
-my_lat <- 13.811979809223814 * 2 * pi/360
-my_lon <- 100.5052562120295 * 2 * pi/360
+# Location: Ninomiya house
+# my_lat <-36.07140157738488 * 2 * pi/360
+# my_house_lon <-140.1152927073172 * 2 * pi/360
 
-#Calculate the distance between current position and weather stations
+#Location: Mt. Sapporo, 
+# my_lat <-42.90197963307666 * 2 * pi/360
+# my_lon <-141.201075241656 * 2 * pi/360
+
+#Location: Calgary tower, Canada
+my_lat <-51.04532663382111 * 2 * pi/360
+my_lon <--114.06326788013058 * 2 * pi/360
+
+ #Calculate the distance between current position and weather stations
 # Use this reference for calculation: https://www.geeksforgeeks.org/program-distance-two-points-earth/
 
 #Distance, d = 3963.0 * arccos[(sin(lat1) * sin(lat2)) + cos(lat1) * cos(lat2) * cos(long2 – long1)]
@@ -33,7 +45,7 @@ my_station <- inventory %>%
                      lon_radian = lon * 2 * pi/360,
                      d_km = 1.609344 * 3963 * acos((sin(lat_radian) * sin(my_lat)) + cos(lat_radian) * cos(my_lat) * cos(my_lon - lon_radian))
               ) %>%
-              filter(start < 1960 & end > 2020) %>% # Capture station name
+              filter(start < 1960 & end > 2020) %>%# Capture station name
               top_n(n = -1, d_km) %>% #find the lowest distance
               distinct(station) %>%  #get the weather station
               pull(station) #%>% # Get station name as a variable
@@ -47,7 +59,7 @@ local_weather <- read_csv(station_daily,
                           col_names = c("station", "date", "variable", "value", "a", "b", "c", "d")) %>% 
                  select(date, variable, value) %>% 
                  pivot_wider(names_from = "variable", values_from = "value") %>%  # convert to wider dataframe
-                 select(date, TMAX, TMIN, PRCP) %>% 
+                 select(date, TMAX, TMIN, PRCP, SNOW) %>% 
                  mutate(date = ymd(date), #convert date format
                         TMAX = TMAX / 10, # convert tenths of degree C to degree C 
                         TMIN = TMIN / 10, # convert tenths of degree C to degree C
@@ -86,3 +98,17 @@ local_weather %>%
   ggplot(aes(x = prcp)) +
   geom_histogram(binwidth = 8) #+ # give 1 degree binwidth
   # scale_y_continuous(limits = c(0,100))
+
+#Identify problematic data with histogram in snow
+local_weather %>% 
+  ggplot(aes(x = date, y = snow)) +
+  geom_line()
+
+local_weather %>% 
+  slice_max(n=6, snow)
+local_weather %>% 
+  slice_min(n=6, snow)
+#Identify problematic data with histogram in snow
+local_weather %>% 
+  ggplot(aes(x = snow)) +
+  geom_histogram()
