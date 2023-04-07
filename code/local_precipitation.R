@@ -25,10 +25,18 @@ local_weather %>%
                     values = c(0.3,0.5)) + #Adjust the size of lines
   scale_x_date(date_labels = "%B", #Give a custom month label
                date_breaks = "2 months") + #Break months into 2 months
+  scale_y_continuous(breaks = seq(0,2200,200), #Break the y scale
+                     labels = seq(0,220,20), #Label the y axis into centimeters
+                     limits = c(0, 2200), #Give the limit to an axis
+                     expand = c(0,0)) + #Remove the space between an axis
   theme(
     panel.background = element_blank(),
     panel.grid = element_blank(),
     axis.line = element_line()
+       ) +
+  labs(
+    x = NULL,
+    y = "Cumulative precipitation (cm)"
   )
   
 ggsave("figures/cumulative_prcp.png", width = 6, height = 5)
