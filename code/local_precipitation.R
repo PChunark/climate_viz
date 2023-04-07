@@ -19,6 +19,10 @@ local_weather %>%
              color = is_this_year,
              size = is_this_year))+
   geom_step(show.legend = FALSE) + #Remove legend
+  geom_smooth(aes(group = 1), #Tell geom smooth that we need 1 group of an average line
+              color = "black", 
+              size = 0.3,
+              se = FALSE) + #Remove standard error from grom_smooth 
   scale_color_manual(breaks = c(F,T), #Give the color of lines
                      values = c("lightgrey", "dodgerblue")) + 
   scale_size_manual(breaks = c(F,T),
