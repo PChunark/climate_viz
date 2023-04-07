@@ -22,11 +22,12 @@ local_weather %>%
   mutate(name = factor(name, levels = c("prob_prcp", "mean_prcp", "mean_event"))) %>% 
   ggplot(aes(x = date, y = value)) +
   geom_line() +
+  geom_hline(yintercept = 0) + #Add a zero line intercept for facet plot
   geom_smooth(se = FALSE) +
   facet_wrap(~name, ncol = 1, scales = "free_y",
              strip.position = "left",
              labeller = labeller(name = pretty_labels)) + #Rename the strip from labeller
-  scale_y_continuous(limits = c(0, NA)) + #Let the scale determine what to go up to.
+  scale_y_continuous(limits = c(0, NA), expand = c(0,0)) + #Let the scale determine what to go up to.
   scale_x_date(date_breaks = "2 months",
                date_labels = "%B") +
   labs(
@@ -35,6 +36,10 @@ local_weather %>%
       ) +
   theme(
         strip.placement = "outside",
-        strip.background = element_blank() #Remove strip background
-  )
+        strip.background = element_blank(), #Remove strip background
+        panel.background = element_blank(),
+        panel.grid = element_blank(),
+        axis.line = element_line()
+        )
  
+ggsave("figures/prcp_prob_amount.png", width = 5, height = 7)
