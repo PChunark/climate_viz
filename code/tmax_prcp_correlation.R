@@ -54,3 +54,9 @@ tmax_plot +
         axis.title.y.left = element_text(color = "blue"),
         axis.title.y.right = element_text(color = "red")
   )
+
+
+tmax_prcp %>% 
+ggplot(aes(x = tmax, y = prcp, color = year)) +
+  geom_point()+
+  geom_smooth(method = "lm") # See the correlation by linear regression
