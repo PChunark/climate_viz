@@ -11,5 +11,11 @@ local_weather %>%
             mean_prcp = mean(prcp), # Calculate the mean precipitation for each month and day. It includes zero value.
             mean_event = mean(prcp[prcp>0]), #Cutting out all zero value. If there is a rain, what the mean that day is.
             .groups = "drop"
-            ) %>% print(n=100)
-  mutate(date = ymd(glue("2020-{month}-{day}")))#Create for scale x date only. We will not see "2020" in the plot.
+            ) %>% 
+  mutate(date = ymd(glue("2020-{month}-{day}"))) %>% #Create for scale x date only. We will not see "2020" in the plot.
+  pivot_longer(cols = c(prob_prcp, mean_prcp, mean_event)) %>% #Pivot the specific column
+  ggplot(aes(x = date, y = value)) +
+  geom_line() +
+  geom_smooth(se = FALSE) +
+  facet_wrap(~name, ncol = 1, scales = "free_y") +
+  scale_y_continuous(limits = c(0, NA)) #Let the scale determine what to go up to.
