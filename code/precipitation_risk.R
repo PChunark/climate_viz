@@ -14,8 +14,20 @@ local_weather %>%
             ) %>% 
   mutate(date = ymd(glue("2020-{month}-{day}"))) %>% #Create for scale x date only. We will not see "2020" in the plot.
   pivot_longer(cols = c(prob_prcp, mean_prcp, mean_event)) %>% #Pivot the specific column
+  mutate(name = factor(name, levels = c("prob_prcp", "mean_prcp", "mean_event"))) %>% 
   ggplot(aes(x = date, y = value)) +
   geom_line() +
   geom_smooth(se = FALSE) +
-  facet_wrap(~name, ncol = 1, scales = "free_y") +
-  scale_y_continuous(limits = c(0, NA)) #Let the scale determine what to go up to.
+  facet_wrap(~name, ncol = 1, scales = "free_y",
+             strip.position = "left") +
+  scale_y_continuous(limits = c(0, NA)) + #Let the scale determine what to go up to.
+  scale_x_date(date_breaks = "2 months",
+               date_labels = "%B") +
+  labs(
+        x = NULL,
+        y = NULL
+      ) +
+  theme(
+        strip.placement = "outside"
+  )
+ 
