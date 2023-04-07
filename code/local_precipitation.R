@@ -52,8 +52,8 @@ local_weather %>%
   labs(
     x = NULL,
     y = "Cumulative precipitation (cm)",
-    title = glue("Though {this_month} {this_day}, the cumulative precipitation near EGAT main office, 
-                 Nonthaburi is<span style = 'color: dodgerblue'> below average </span> for {this_year}")
+    title = glue("Though {this_month} {this_day}, the cumulative precipitation near Calgary tower, 
+                 Calgary, Canada is<span style = 'color: dodgerblue'> below average </span> for {this_year}")
   )
   
 ggsave("figures/cumulative_prcp.png", width = 6, height = 5)
