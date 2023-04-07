@@ -10,4 +10,7 @@ local_weather %>%
   group_by(year) %>% #Calculate cumulative prcp by year
   arrange(date) %>%  
   mutate(cum_prcp = cumsum(prcp)) %>%  #Calculate cumulative prcp by year
-  ungroup()
+  ungroup() %>% 
+  mutate(new_date = ymd(glue("2022-{month}-{day}"))) %>%  #Create Pseudo date???
+  ggplot(aes(x = new_date, y = cum_prcp, group = year))+
+  geom_step()
