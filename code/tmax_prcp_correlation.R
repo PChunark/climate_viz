@@ -60,3 +60,7 @@ tmax_prcp %>%
 ggplot(aes(x = tmax, y = prcp, color = year)) +
   geom_point()+
   geom_smooth(method = "lm") # See the correlation by linear regression
+
+#Correlatio test of the variables
+cor.test(tmax_prcp$tmax, tmax_prcp$prcp)
+cor.test(tmax_prcp$tmax, tmax_prcp$prcp, method = "spearman" , exact = FALSE)
