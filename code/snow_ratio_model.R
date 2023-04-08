@@ -25,10 +25,15 @@ prcp_snow_annual %>%
 cor.test(prcp_snow_annual$prcp, prcp_snow_annual$snow)
 
 #Create an daily precipitation and snow
-local_weather %>% 
+prcp_snow_daily <- local_weather %>% 
   drop_na() %>% 
   filter(snow > 0) %>% 
-  mutate(year = year(date)) %>% 
-  filter(year != 2023) %>% 
-  ggplot(aes(x = prcp, y = snow, color = year)) +
+  mutate(year = year(date)) 
+  # filter(year != 2023) 
+  
+  
+prcp_snow_daily%>% 
+  ggplot(aes(x = prcp, y = snow, color = tmax)) +
   geom_point()
+
+cor.test(prcp_snow_daily$prcp, prcp_snow_daily$snow)
