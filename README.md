@@ -5,7 +5,7 @@
 This repository is solely for my R learning.
 The repository organization follows the Prof. Pat from Riffomonas Project on youtube channel.
 Riffomonas Project channel follow this link https://www.youtube.com/@Riffomonas.
-## There are 14 codes.
+## There are 19 codes.
 1. Drawing line plot using NASA data. Follow the link CC215 episode -->https://www.youtube.com/watch?v=fskblEWSeWU&t=951s. 
 2. Drawing global temperature change since 1880 barplots. Follow the link CC216 episode --> https://www.youtube.com/watch?v=HDXY0idH7KY&t=621s.
 3. Drawing Ed_hawkins figure. Follow the link cc217 episode --> https://www.youtube.com/watch?v=gOyya2DLVfQ.
@@ -37,6 +37,10 @@ https://www.youtube.com/watch?v=facMJFmsUlw
 https://www.youtube.com/watch?v=ir-NMcrYD-I
 19. Stylizing the appearance of facet labels with ggplot2's facet_wrap. Follow the link CC236 -->
 https://www.youtube.com/watch?v=v1hTB2b_YkE
+
+## How to organize a directory in R by Prof. Pat
+1. Three approaches to organize your R project. Follow the link CC178 -->
+https://www.youtube.com/watch?v=GeN-qqNLLsM
 
 Enjoy learning R language!!
 
