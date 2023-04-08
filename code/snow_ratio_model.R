@@ -33,7 +33,13 @@ prcp_snow_daily <- local_weather %>%
   
   
 prcp_snow_daily%>% 
+  # filter(!snow >800 & !prcp >60) %>% 
   ggplot(aes(x = prcp, y = snow, color = tmax)) +
-  geom_point()
+  geom_point() +
+  geom_smooth(                         #by default it is a polynomial function. 
+              formula = "y~x+0", #We do a linear regression. Assumed that 0 snow is 0 precipitation. We add an intercept = 0.
+              method = "lm", #this is linear regression method.
+              se = FALSE
+              ) 
 
 cor.test(prcp_snow_daily$prcp, prcp_snow_daily$snow)
