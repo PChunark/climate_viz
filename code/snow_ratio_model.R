@@ -54,12 +54,32 @@ predict(snow_model, prcp_snow_daily)
 
 prcp_snow_daily%>% 
   mutate(predicted_snow = predict(snow_model, prcp_snow_daily)) %>% 
-  ggplot(aes(x = prcp, y = snow, color = tmax)) +
-  geom_point() +
+  ggplot(aes(x = prcp, y = snow)) +
+  geom_point(color = "lightgrey") +
   geom_smooth(                         #by default it is a polynomial function. 
+    aes(color = "simple"),#Give a color
     formula = "y~x+0", #We do a linear regression. Assumed that 0 snow is 0 precipitation. We add an intercept = 0.
     method = "lm", #this is linear regression method.
     se = FALSE
   ) +
-  geom_abline(intercept = 0, slope = 10, size = 1) + #This is the line that we can define an intercept and slope
-  geom_smooth(aes(y = predicted_snow), se = FALSE, color ="red")
+  geom_segment(x = 0, 
+               y = 0, 
+               xend = max(prcp_snow_daily$prcp), 
+               yend = 10 * max(prcp_snow_daily$prcp), 
+               size = 1,
+               aes(color = "rule_of_thumb")) + 
+  geom_smooth(aes(y = predicted_snow,
+                  color = "advanced"), 
+              se = FALSE 
+              ) +
+  labs(
+    x = "Total daily precipitation (mm)",
+    y = "Total daily snowfall (mm)"
+  )+
+  scale_color_manual(name = NULL, #Remove legend title
+                     breaks = c("rule_of_thumb", "simple", "advanced"), #rearrange the legend
+                     labels = c("10:1 rule of thumb", "Simple model", "Advanced model"), #Rename the legend
+                     values = c("black", "blue", "red")) + #Give color to lines
+  theme_classic()
+
+ggsave("figures/model_snow_ratio.png", width = 6, height = 4)
