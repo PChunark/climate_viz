@@ -40,6 +40,7 @@ prcp_snow_daily%>%
               formula = "y~x+0", #We do a linear regression. Assumed that 0 snow is 0 precipitation. We add an intercept = 0.
               method = "lm", #this is linear regression method.
               se = FALSE
-              ) 
+              ) +
+  geom_abline(intercept = 0, slope = 10, size = 1) #This is the line that we can define an intercept and slope
 
 cor.test(prcp_snow_daily$prcp, prcp_snow_daily$snow)
