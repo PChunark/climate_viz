@@ -20,3 +20,11 @@ snow_data %>%
   summarize(total_snow = sum(snow)) %>% 
   ggplot(aes(x = snow_year, y = total_snow)) + 
   geom_line()
+
+# Plotting snowfall by year and month
+snow_data %>%
+  group_by(snow_year, month) %>% 
+  summarize(snow = sum(snow), .groups = "drop") %>% 
+  mutate(month = factor(month, c(7:12,1:6))) %>% 
+  ggplot(aes(x = month, y = snow, group = snow_year, color = snow_year)) +
+  geom_line()
