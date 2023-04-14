@@ -34,13 +34,24 @@ snow_data %>%
   mutate(snow = if_else(is.na(snow), dummy, snow)) %>% 
   group_by(snow_year, month) %>% 
   summarize(snow = sum(snow), .groups = "drop") %>% 
-  mutate(month = factor(month, c(7:12,1:6)),
+  mutate(month = factor(month, c(8:12,1:7)),
          is_this_year = year(today())-1 == snow_year) %>%
   ggplot(aes(x = month, y = snow, group = snow_year, color = is_this_year)) +
   geom_line(show.legend = FALSE) + 
   scale_color_manual(name = NULL,
                      breaks = c(TRUE,FALSE),
                      values = c("dodgerblue", "grey")
-                     )
+                     ) +
+  scale_x_discrete(breaks = c(9, 11, 1, 3, 5), #Add month label as an abbreviation
+                   labels = month.abb[c(9, 11, 1, 3, 5)],
+                   expand = c(0,0)) + # Remove the space between grid 
+  scale_y_continuous(breaks = seq(0,2000,500), #Label the y axis from mm to cm
+                     labels = seq(0,200,50),
+                     limits = c(0,2000,500)) + 
+  labs(x = NULL,
+       y = "Total monthly snowfall (cm)") + 
+  theme(panel.background = element_blank(),
+        panel.grid = element_blank(),
+        axis.line = element_line())
 
 ggsave("figures/snow_by_snow_year.png", width = 6, height = 4)
