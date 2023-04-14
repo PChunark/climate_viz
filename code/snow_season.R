@@ -28,6 +28,15 @@ dummy_df <-
              month = 1:12) %>%
     mutate(dummy = 0)
 
+#Take the total snow from snow_year
+total_snow <-
+  snow_data %>% 
+  group_by(snow_year) %>% 
+  summarize(total_snow = sum(snow)) %>% 
+  filter(snow_year == year(today())-1) %>% 
+  mutate(total_snow = total_snow/10) %>% 
+  pull(total_snow)
+
 # Plotting snowfall by year and month
 snow_data %>%
   right_join(., dummy_df, by = c("snow_year", "month")) %>%
