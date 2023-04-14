@@ -42,3 +42,5 @@ snow_data %>%
                      breaks = c(TRUE,FALSE),
                      values = c("dodgerblue", "grey")
                      )
+
+ggsave("figures/snow_by_snow_year.png", width = 6, height = 4)
