@@ -24,12 +24,15 @@ snow_data %>%
 # Create dummy dataframe for NA value
 dummy_df <-
 
-    crossing(year = 1940:2022,
+    crossing(snow_year = 1940:2022,
              month = 1:12) %>%
     mutate(dummy = 0)
 
 # Plotting snowfall by year and month
 snow_data %>%
+  right_join(., dummy_df, by = c("snow_year", "month")) %>% 
+  filter(is.na(snow)) %>% 
+  mutate(snow_dummy = if_else(is.na(snow), dummy, snow))
   group_by(snow_year, month) %>% 
   summarize(snow = sum(snow), .groups = "drop") %>% 
   mutate(month = factor(month, c(7:12,1:6))) %>% 
