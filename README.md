@@ -39,6 +39,7 @@ https://www.youtube.com/watch?v=ir-NMcrYD-I
 https://www.youtube.com/watch?v=v1hTB2b_YkE
 20. Using factors in R to create a new calendar and see how much snow do we get in Michigan. Follow the link CC238 -->
 https://www.youtube.com/watch?v=Ky8CIMZzO54
+21. Creating a sliding window with the slider R package to quantify the level of drought. Follow the link CC239 --> https://www.youtube.com/watch?v=1X9GGgOPKcI
 
 ## How to organize a directory in R by Prof. Pat
 1. Three approaches to organize your R project. Follow the link CC178 -->
