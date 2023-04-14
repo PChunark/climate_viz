@@ -34,6 +34,11 @@ snow_data %>%
   mutate(snow = if_else(is.na(snow), dummy, snow)) %>% 
   group_by(snow_year, month) %>% 
   summarize(snow = sum(snow), .groups = "drop") %>% 
-  mutate(month = factor(month, c(7:12,1:6))) %>% 
-  ggplot(aes(x = month, y = snow, group = snow_year, color = snow_year)) +
-  geom_line()
+  mutate(month = factor(month, c(7:12,1:6)),
+         is_this_year = year(today())-1 == snow_year) %>%
+  ggplot(aes(x = month, y = snow, group = snow_year, color = is_this_year)) +
+  geom_line(show.legend = FALSE) + 
+  scale_color_manual(name = NULL,
+                     breaks = c(TRUE,FALSE),
+                     values = c("dodgerblue", "grey")
+                     )
