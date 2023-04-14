@@ -1,3 +1,5 @@
+library(ggtext) #Package for using in HTML and MARKDOWN
+
 source("code/local_weather.R")
 
 snow_data <-
@@ -58,9 +60,12 @@ snow_data %>%
                      labels = seq(0,200,50),
                      limits = c(0,2000,500)) + 
   labs(x = NULL,
-       y = "Total monthly snowfall (cm)") + 
+       y = "Total monthly snowfall (cm)",
+       title = glue("The snow year {year(today())-1} had a total snow {total_snow} cm of snow.")) + 
   theme(panel.background = element_blank(),
         panel.grid = element_blank(),
-        axis.line = element_line())
+        axis.line = element_line(),
+        plot.title.position = "plot",
+        plot.title = element_markdown()) #Render html and markdown into a title
 
 ggsave("figures/snow_by_snow_year.png", width = 6, height = 4)
