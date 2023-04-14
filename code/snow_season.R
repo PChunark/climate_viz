@@ -30,9 +30,8 @@ dummy_df <-
 
 # Plotting snowfall by year and month
 snow_data %>%
-  right_join(., dummy_df, by = c("snow_year", "month")) %>% 
-  filter(is.na(snow)) %>% 
-  mutate(snow_dummy = if_else(is.na(snow), dummy, snow))
+  right_join(., dummy_df, by = c("snow_year", "month")) %>%
+  mutate(snow = if_else(is.na(snow), dummy, snow)) %>% 
   group_by(snow_year, month) %>% 
   summarize(snow = sum(snow), .groups = "drop") %>% 
   mutate(month = factor(month, c(7:12,1:6))) %>% 
