@@ -61,7 +61,7 @@ snow_data %>%
                      limits = c(0,2000,500)) + 
   labs(x = NULL,
        y = "Total monthly snowfall (cm)",
-       title = glue("The snow year {year(today())-1} had a total snow {total_snow} cm of snow.")) + 
+       title = glue("The <span style = 'color:dodgerblue'> snow year {year(today())-1}</span> had a total snow {total_snow} cm of snow.")) + 
   theme(panel.background = element_blank(),
         panel.grid = element_blank(),
         axis.line = element_line(),
