@@ -1,3 +1,5 @@
+library(slider)
+
 source("code/local_weather.R")
 
 local_weather %>%
