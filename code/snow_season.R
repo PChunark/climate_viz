@@ -21,6 +21,13 @@ snow_data %>%
   ggplot(aes(x = snow_year, y = total_snow)) + 
   geom_line()
 
+# Create dummy dataframe for NA value
+dummy_df <-
+
+    crossing(year = 1940:2022,
+             month = 1:12) %>%
+    mutate(dummy = 0)
+
 # Plotting snowfall by year and month
 snow_data %>%
   group_by(snow_year, month) %>% 
