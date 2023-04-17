@@ -1,6 +1,9 @@
-library(slider)
-
 source("code/local_weather.R")
+library(slider)
+# Update environment in r
+# renv::snapshot()
+
+
 
 local_weather %>%
   select(date, prcp) %>% 
@@ -10,3 +13,9 @@ local_weather %>%
          one_day_lead = lead(prcp), # Add a lag data to the dataframe by one day
          two_day_lead = lead(prcp, n = 2)
 )
+
+# How to use slider! It is a function to window (snapshot) a data
+x <- 1:10
+slider(x, 
+       ~.x,
+       .before = 1)
