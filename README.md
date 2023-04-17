@@ -45,6 +45,12 @@ https://www.youtube.com/watch?v=Ky8CIMZzO54
 1. Three approaches to organize your R project. Follow the link CC178 -->
 https://www.youtube.com/watch?v=GeN-qqNLLsM
 
+
+## How to save package and environment in R
+1. Using renv to track the version of your packages in R. Follow the link CC229 -->
+https://www.youtube.com/watch?v=yc7ZB4F_dc0&t=2s
+2. How to create a conda or mamba environment for R programming to enhance reproducibility. Follow the link  CC230 --> https://www.youtube.com/watch?v=QI2Qg_1aySc&t=170s
+
 Enjoy learning R language!!
 
 
