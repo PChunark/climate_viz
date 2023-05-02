@@ -16,6 +16,6 @@ local_weather %>%
 
 # How to use slider! It is a function to window (snapshot) a data
 x <- 1:10
-slider(x, 
+slide(x, 
        ~.x,
        .before = 1)
