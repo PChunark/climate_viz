@@ -1249,6 +1249,20 @@
       ],
       "Hash": "3838071b66e0c566d55cc26bd6e27bf4"
     },
+    "slider": {
+      "Package": "slider",
+      "Version": "0.3.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "cli",
+        "rlang",
+        "vctrs",
+        "warp"
+      ],
+      "Hash": "c1c73df260af9e1e3692eb3b8e1ecb88"
+    },
     "stringi": {
       "Package": "stringi",
       "Version": "1.7.12",
@@ -1523,6 +1537,16 @@
         "withr"
       ],
       "Hash": "7015a74373b83ffaef64023f4a0f5033"
+    },
+    "warp": {
+      "Package": "warp",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "2982481615756e24e79fee95bdc95daa"
     },
     "withr": {
       "Package": "withr",
