@@ -16,6 +16,42 @@ local_weather %>%
 
 # How to use slider! It is a function to window (snapshot) a data
 x <- 1:10
+
+# Create lead approach
+# The output of the slide function is a list!!!!!!!!!!!!!!
 slide(x, 
-       ~.x,
-       .before = 1)
+       ~.x, # The value of the first slot of x vector
+       .before = 1) # slide it using the value before the current value by 1 position
+
+# Create lag approach
+# The output of the slide function is a list!!!!!!!!!!!!!!
+slide(x, 
+      ~.x, # The value of the first slot of x vector
+      .after = 2) # slide it using the value before the current value by 1 position
+
+# Need only the complete set of value
+# The output of the slide function is a list!!!!!!!!!!!!!!
+slide(x, 
+      ~.x, # The value of the first slot of x vector
+      .after = 2,  # slide it using the value before the current value by 1 position
+      .complete = TRUE) # last 2 set are null because it is not a complete set
+
+# Calculate the sum of value in a complete set
+# The output of the slide function is a list!!!!!!!!!!!!!!
+slide(x, 
+      ~sum(.x), # The value of the first slot of x vector
+      .before = 2, # slide it using the value before the current value by 1 position
+      .complete = TRUE)
+
+#Extract the output from a list to a vector
+slide_dbl(x, 
+      ~sum(.x), # The value of the first slot of x vector
+      .before = 2, # slide it using the value before the current value by 1 position
+      .complete = TRUE)
+
+# Test a slide function with a simple data frame
+tibble(x = 1:10) %>% 
+  mutate(total = slide_dbl(x, 
+                           ~sum(.x), # The value of the first slot of x vector
+                           .before = 2, # slide it using the value before the current value by 1 position
+                           .complete = TRUE))
