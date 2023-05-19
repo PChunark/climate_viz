@@ -1,5 +1,6 @@
 source("code/local_weather.R")
 library(slider)
+library(ggtext)
 # Update environment in r
 # renv::snapshot()
 
@@ -95,11 +96,24 @@ drought_data %>%
              y = window_prcp,
              group = end_year,
              color = is_drought_year)) + 
-  geom_line() + 
+  geom_line(show.legend = FALSE) + 
   geom_line(data = drought_line, 
             aes(x = fake_date,
                 y = threshold),
             inherit.aes = FALSE, # Dont use the mapping aes from the above geom_line command
             color = "red") +
   scale_color_manual(breaks = c(T,F),
-                     values = c("dodgerblue", "grey"))
+                     values = c("dodgerblue", "grey")) +
+  scale_x_date(date_breaks = "2 months", 
+               date_labels = "%B") + #Change the x label as full name months
+  labs(x = NULL,
+       y = "Total precipitation over previous 100 days (mm)",
+       title = "The summer of <span style='color:dodgerblue'> 2012 </span> has less precipitation than <span style='color:red'> 95% of previous year dating back to 1939 </span>") + # styling html to the text
+  theme(panel.background = element_blank(),# Clean up the theme
+        panel.grid = element_blank(),
+        axis.line = element_line(),
+        plot.title = element_textbox_simple(margin = margin(b = 10)),
+        plot.title.position = "plot"
+       )
+
+ggsave("figures/drought.png", height = 4, width = 6)
