@@ -62,8 +62,17 @@ local_weather %>%
   arrange(date) %>%  #Arrange the date in order
   mutate(window_prcp = slide_dbl(prcp, 
                                  ~sum(.x), 
-                                 .before = 29, 
-                                 .complete = TRUE)) %>%  # 30 days windows, it is the current day plus a previous 29 days
+                                 .before = 99, # 100 days windows, it is the current day plus a previous 99 days
+                                 .complete = TRUE)) %>%  
   drop_na(window_prcp) %>% 
   mutate(start = date - 29) %>% #Calculate start date of the calculation
-  select(start, end = date, window_prcp) # Select and rename column names
+  select(start, end = date, window_prcp) %>%  # Select and rename column names
+  mutate(end_month = month(end), # Analyse whether the month in the slideing window is drier or wetter than we might expect in overall years in the data  
+         end_day = day(end),
+         end_year = year(end)) %>% 
+  group_by(end_month, end_day) %>% 
+  mutate(threshold = quantile(window_prcp, prob = 0.05)) %>%  # define a droughty day as being below the 5th percentile for that day of the year 
+  ungroup() %>% 
+  filter(window_prcp < threshold) %>% tail()  #Analyse the drought
+  # filter(end_year == 2022) %>% 
+  # print(n = Inf) # Print all results to the console screen
