@@ -56,7 +56,8 @@ tibble(x = 1:10) %>%
                            .before = 2, # slide it using the value before the current value by 1 position
                            .complete = TRUE))
 
-local_weather %>%
+drought_data <-
+  local_weather %>%
   select(date, prcp) %>% 
   mutate(prcp = if_else(is.na(prcp), 0, prcp)) %>% 
   arrange(date) %>%  #Arrange the date in order
@@ -72,7 +73,15 @@ local_weather %>%
          end_year = year(end)) %>% 
   group_by(end_month, end_day) %>% 
   mutate(threshold = quantile(window_prcp, prob = 0.05)) %>%  # define a droughty day as being below the 5th percentile for that day of the year 
-  ungroup() %>% 
-  filter(window_prcp < threshold) %>% tail()  #Analyse the drought
+  ungroup() #%>% 
+  # filter(window_prcp < threshold)   #Analyse the drought
   # filter(end_year == 2022) %>% 
   # print(n = Inf) # Print all results to the console screen
+
+drought_data %>%
+  mutate(fake_date = ymd(glue("2020-{end_month}-{end_day}"))) %>% #create a fake_date to create an x axis. So we take a leap year
+  select(-start, -end) %>% 
+  ggplot(aes(x = fake_date,
+             y = window_prcp,
+             group = end_year)) + 
+  geom_line()
