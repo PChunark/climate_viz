@@ -78,10 +78,23 @@ drought_data <-
   # filter(end_year == 2022) %>% 
   # print(n = Inf) # Print all results to the console screen
 
+ # A threshold column has repeated data in month and day. We removed the repeated data by using a "distinct" function.
+
+drought_line <-
+  drought_data %>% 
+  select(end_month, end_day, threshold) %>% 
+  distinct() %>% # Remove repeated month and day
+  mutate(fake_date = ymd(glue("2020-{end_month}-{end_day}"))) # Add fake date
+  
 drought_data %>%
   mutate(fake_date = ymd(glue("2020-{end_month}-{end_day}"))) %>% #create a fake_date to create an x axis. So we take a leap year
   select(-start, -end) %>% 
   ggplot(aes(x = fake_date,
              y = window_prcp,
              group = end_year)) + 
-  geom_line()
+  geom_line() + 
+  geom_line(data = drought_line, 
+            aes(x = fake_date,
+                y = threshold),
+            inherit.aes = FALSE, # Dont use the mapping aes from the above geom_line command
+            color = "red")
