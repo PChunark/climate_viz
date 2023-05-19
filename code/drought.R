@@ -89,12 +89,17 @@ drought_line <-
 drought_data %>%
   mutate(fake_date = ymd(glue("2020-{end_month}-{end_day}"))) %>% #create a fake_date to create an x axis. So we take a leap year
   select(-start, -end) %>% 
+  mutate(is_drought_year = end_year == 2012, # highlight the precipitation in 2012
+         end_year = fct_reorder(factor(end_year), is_drought_year)) %>% # Reorder the line because the line is drawn as an order. Convert a "end_year" to a factor
   ggplot(aes(x = fake_date,
              y = window_prcp,
-             group = end_year)) + 
+             group = end_year,
+             color = is_drought_year)) + 
   geom_line() + 
   geom_line(data = drought_line, 
             aes(x = fake_date,
                 y = threshold),
             inherit.aes = FALSE, # Dont use the mapping aes from the above geom_line command
-            color = "red")
+            color = "red") +
+  scale_color_manual(breaks = c(T,F),
+                     values = c("dodgerblue", "grey"))
