@@ -55,3 +55,15 @@ tibble(x = 1:10) %>%
                            ~sum(.x), # The value of the first slot of x vector
                            .before = 2, # slide it using the value before the current value by 1 position
                            .complete = TRUE))
+
+local_weather %>%
+  select(date, prcp) %>% 
+  mutate(prcp = if_else(is.na(prcp), 0, prcp)) %>% 
+  arrange(date) %>%  #Arrange the date in order
+  mutate(window_prcp = slide_dbl(prcp, 
+                                 ~sum(.x), 
+                                 .before = 29, 
+                                 .complete = TRUE)) %>%  # 30 days windows, it is the current day plus a previous 29 days
+  drop_na(window_prcp) %>% 
+  mutate(start = date - 29) %>% #Calculate start date of the calculation
+  select(start, end = date, window_prcp) # Select and rename column names
