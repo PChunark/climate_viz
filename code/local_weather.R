@@ -17,8 +17,8 @@ inventory <-read_table(inventory_url,
 # The location given in google map is in degree unit. We need to convert it to radian.
 
 # Location: EGAT T100 Building
-# my_lat <- 13.811979809223814 * 2 * pi/360 #EGAT main building lat
-# my_lon <- 100.5052562120295 * 2 * pi/360 #EGAT main building lon
+my_lat <- 13.811979809223814 * 2 * pi/360 #EGAT main building lat
+my_lon <- 100.5052562120295 * 2 * pi/360 #EGAT main building lon
 
 # Location: Ninomiya house
 # my_lat <-36.07140157738488 * 2 * pi/360
@@ -29,8 +29,8 @@ inventory <-read_table(inventory_url,
 # my_lon <-141.201075241656 * 2 * pi/360
 
 #Location: Calgary tower, Canada
-my_lat <-51.04532663382111 * 2 * pi/360
-my_lon <--114.06326788013058 * 2 * pi/360
+# my_lat <-51.04532663382111 * 2 * pi/360
+# my_lon <--114.06326788013058 * 2 * pi/360
 
  #Calculate the distance between current position and weather stations
 # Use this reference for calculation: https://www.geeksforgeeks.org/program-distance-two-points-earth/
@@ -57,9 +57,9 @@ station_daily <- glue("https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/
 #Search for readme station data
 local_weather <- read_csv(station_daily,
                           col_names = c("station", "date", "variable", "value", "a", "b", "c", "d")) %>% 
-                 select(date, variable, value) %>% 
+                 select(station, date, variable, value) %>% 
                  pivot_wider(names_from = "variable", values_from = "value") %>%  # convert to wider dataframe
-                 select(date, TMAX, TMIN, PRCP, SNOW) %>% 
+                 # select(date, TMAX, TMIN, PRCP) %>% 
                  mutate(date = ymd(date), #convert date format
                         TMAX = TMAX / 10, # convert tenths of degree C to degree C 
                         TMIN = TMIN / 10, # convert tenths of degree C to degree C
