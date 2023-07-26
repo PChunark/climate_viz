@@ -16,9 +16,9 @@ inventory <-read_table(inventory_url,
 #Find the location that we are living in. 
 # The location given in google map is in degree unit. We need to convert it to radian.
 
-# Location: EGAT T100 Building
-my_lat <- 13.811979809223814 * 2 * pi/360 #EGAT main building lat
-my_lon <- 100.5052562120295 * 2 * pi/360 #EGAT main building lon
+# Location: Nam Ngum Hydro power plant
+my_lat <- 18.792502525314656 * 2 * pi/360 #Nam Ngum Hydro power plant lat
+my_lon <- 102.48927742108829 * 2 * pi/360 #Nam Ngum Hydro power plant lon
 
 # Location: Ninomiya house
 # my_lat <-36.07140157738488 * 2 * pi/360
