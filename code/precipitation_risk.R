@@ -8,7 +8,7 @@ pretty_labels <- c("prob_prcp" = "Probability of precipitation",
 #Create variables for a vertical line
 today_month <- month(today())
 today_day <- day(today())
-today_date <- ymd(glue("2020-{today_month}={today_day}"))
+today_date <- ymd(glue("2023-{today_month}={today_day}"))
 
 local_weather %>% 
   select(date, prcp) %>% 
