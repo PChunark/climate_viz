@@ -1,3 +1,5 @@
+source("code/local_weather.R")
+
 library(tidyverse)
 library(writexl)
 library(readxl)
@@ -38,8 +40,7 @@ prcp_namngum_yearly <-
          month = month(date),
          weekday = weekdays(date),
          yday = yday(date),
-         day = day(date)) %>% 
-  filter(year >=2005 & year < 2023) %>% 
+         day = day(date)) %>%
   group_by(year) %>% 
   summarize(prcp_year = sum(prcp),
             .groups = "drop")
@@ -82,9 +83,9 @@ prcp_namngum_yearly%>%
   geom_line(aes(color = "salmon"), show.legend = FALSE)+
   geom_point(shape = 22)+
   geom_smooth(se = FALSE)+
-  scale_x_continuous(breaks = seq(2005, 2023,1))+
-  scale_y_continuous(breaks = seq(0, 1200, 100),
-                     limits = c(0,1200))+
+  # scale_x_continuous(breaks = seq(2005, 2023,1))+
+  # scale_y_continuous(breaks = seq(0, 1200, 100),
+                     # limits = c(0,1200))+
   ThemeLine+
   labs(x = NULL,
        y = "Precipitation amount (mm)")
@@ -138,4 +139,7 @@ writexl::write_xlsx(local_weather %>%
                      group_by(year, month) %>% 
                      summarize(prcp_year = sum(prcp),
                                .groups = "drop"), "data/Nam Ngum precipitation_monthly.xlsx")
+
+writexl::write_xlsx(prcp_namngum_yearly,
+                    "data/Nam Ngum precipitation_allyearly.xlsx")
                                
