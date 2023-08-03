@@ -98,17 +98,3 @@ local_weather %>%
   ggplot(aes(x = prcp)) +
   geom_histogram(binwidth = 8) #+ # give 1 degree binwidth
   # scale_y_continuous(limits = c(0,100))
-
-#Identify problematic data with histogram in snow
-local_weather %>% 
-  ggplot(aes(x = date, y = snow)) +
-  geom_line()
-
-local_weather %>% 
-  slice_max(n=6, snow)
-local_weather %>% 
-  slice_min(n=6, snow)
-#Identify problematic data with histogram in snow
-local_weather %>% 
-  ggplot(aes(x = snow)) +
-  geom_histogram()
