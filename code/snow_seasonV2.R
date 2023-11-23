@@ -14,21 +14,26 @@ snow_data <-
          ) %>% 
   filter(!calendar_year == 1939)  %>% 
   select(month, snow_year, snow) %>% 
-  filter(snow_year != 1939) 
+  filter(snow_year != 1939) %>% 
+  mutate(snow_year = factor(snow_year, levels = 1939:year(today())-1),
+         month = factor(month, c(8:12,1:7)))
 
 #Plotting cumulative snowfall by year 
 snow_data %>% 
-  group_by(snow_year) %>% 
-  summarize(total_snow = sum(snow)) %>% 
+  group_by(snow_year, .drop = FALSE) %>% 
+  summarize(total_snow = sum(snow)) %>%
+  mutate(snow_year = as.numeric(levels(snow_year))) %>% 
   ggplot(aes(x = snow_year, y = total_snow)) + 
   geom_line()
 
-# Create dummy dataframe for NA value
-# dummy_df <-
-# 
-#     crossing(snow_year = 1940:2022,
-#              month = 1:12) %>%
-#     mutate(dummy = 0)
+# Count the day that have snow data
+snow_data %>% 
+  filter(snow > 0) %>% 
+  count(snow_year, .drop = FALSE) %>%
+  mutate(snow_year = as.numeric(levels(snow_year))) %>% 
+  ggplot(aes(x = snow_year, y = n))+
+  geom_line()
+
 
 #Take the total snow from snow_year
 total_snow <-
@@ -41,10 +46,6 @@ total_snow <-
 
 # Plotting snowfall by year and month
 snow_data %>%
-  mutate(snow_year = factor(snow_year, levels = 1939:year(today())-1),
-         month = factor(month, c(8:12,1:7))) %>% 
-  # right_join(., dummy_df, by = c("snow_year", "month")) %>%
-  # mutate(snow = if_else(is.na(snow), dummy, snow)) %>% 
   group_by(snow_year, month, .drop = FALSE) %>% 
   summarize(snow = sum(snow), .groups = "drop") %>% 
   mutate(is_this_year = year(today())-1 == snow_year) %>%
