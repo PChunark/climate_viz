@@ -10,7 +10,7 @@ drought_by_year<-
   filter(prcp > threshold) %>% 
   mutate(prev_date = lag(date, n = 1)) %>% 
   drop_na() %>% 
-  mutate(drought_length = as.numeric(date-prev_date),#find a drought length
+  mutate(drought_length = as.numeric(date-prev_date)-1,#find a drought length and exclude 1 day drought length 
          year = year(date)) %>% 
   select(year, length = drought_length)
 
@@ -18,5 +18,13 @@ drought_by_year %>%
   filter(year == 1976) %>% 
   ggplot(aes(x = length)) +
   geom_histogram()
+
+
+drought_by_year %>% 
+  group_by(year) %>% 
+  summarize(median = median(length),
+            mean = mean(length),
+            max = max(length),
+            upperquartile = quantile(length, probs = 0.75))
 
 ggsave("figures/drought_lengths.png", width = 6, height = 4)
