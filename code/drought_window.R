@@ -13,3 +13,10 @@ drought_by_year<-
   mutate(drought_length = as.numeric(date-prev_date),#find a drought length
          year = year(date)) %>% 
   select(year, length = drought_length)
+
+drought_by_year %>% 
+  filter(year == 1976) %>% 
+  ggplot(aes(x = length)) +
+  geom_histogram()
+
+ggsave("figures/drought_lengths.png", width = 6, height = 4)
