@@ -8,3 +8,8 @@ no_na_no_zero <-
 
 # Calculate correlation 
 cor.test(~prcp+snow, data = no_na_no_zero)
+
+# Use dplyr function without pipe operator ####
+no_nas <- drop_na(local_weather)
+no_nas_no_zero <- filter(no_nas, snow > 0)
+cor.test(~prcp+snow, data = no_nas_no_zero)
