@@ -20,9 +20,9 @@ cor.test(~prcp+snow, data = no_nas_no_zero)
 no_nas_no_zero2<-
   local_weather |>
   drop_na() |>
-  filter(snow > 0) 
+  filter(snow > 0) |>
   
-cor.test(~prcp + snow, data = no_nas_no_zero2)
+cor.test(~prcp + snow, data = _)
 
 # The magrittr pipe ####
 
