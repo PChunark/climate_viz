@@ -31,8 +31,17 @@ local_weather %>%
   filter(snow > 0) %>% 
   cor.test(~prcp + snow, data = .)
 
-# The exposition pipe
+# The exposition pipe ####
 local_weather %>% 
   drop_na() %>% 
   filter(snow > 0) %$% #exposition pipe must load library(magrittr)
   cor.test(~prcp + snow, data = .)
+
+# The T pipe ####
+# It use for debug the code
+local_weather %>% 
+  drop_na() %T>%
+  print() %>% 
+  filter(snow > 0) %T>%
+  print() %>% 
+  summarize(total_prcp = sum(prcp))
