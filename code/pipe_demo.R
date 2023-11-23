@@ -1,4 +1,5 @@
 source("code/local_weather.R")
+library(magrittr)
 
 # USe BASE R to filter out NA and Zero Values ####
 no_na_no_zero <-
@@ -22,3 +23,16 @@ no_nas_no_zero2<-
   filter(snow > 0) 
   
 cor.test(~prcp + snow, data = no_nas_no_zero2)
+
+# The magrittr pipe ####
+
+local_weather %>% 
+  drop_na() %>% 
+  filter(snow > 0) %>% 
+  cor.test(~prcp + snow, data = .)
+
+# The exposition pipe
+local_weather %>% 
+  drop_na() %>% 
+  filter(snow > 0) %$% #exposition pipe must load library(magrittr)
+  cor.test(~prcp + snow, data = .)
