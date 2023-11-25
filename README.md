@@ -40,6 +40,13 @@ https://www.youtube.com/watch?v=v1hTB2b_YkE
 20. Using factors in R to create a new calendar and see how much snow do we get in Michigan. Follow the link CC238 -->
 https://www.youtube.com/watch?v=Ky8CIMZzO54
 21. Creating a sliding window with the slider R package to quantify the level of drought. Follow the link CC239 --> https://www.youtube.com/watch?v=1X9GGgOPKcI
+22. Using the drop argument in count and group_by with factors to include missing data (Script: snow_seasonV2.R & .dropExample.R). Follow the link CC240 --> https://www.youtube.com/watch?v=q9Xq2fliEec&t=1s
+23. Using the dplyr lag and lead function to find the length of drought (Script: drought_window.R). Follow the link CC245 --> https://www.youtube.com/watch?v=uNQ3fwnUQsE
+
+
+## The differences between the BASE R pipe & the magrittr pipe
+1. The magrittr and base R pipe: what's the difference (Script: pipe_demo.R)? Follow the link CC241 --> https://www.youtube.com/watch?v=TmSwDAvPX2Q
+2. A head to head comparison of the base R and magrittr pipe. Follow the link CC244 --> https://www.youtube.com/watch?v=IL31LG84i5M&t=984s
 
 ## How to organize a directory in R by Prof. Pat
 1. Three approaches to organize your R project. Follow the link CC178 -->
